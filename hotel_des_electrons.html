@@ -1,0 +1,2026 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>L’Hôtel des électrons</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Unbounded:wght@500;700&family=Lexend:wght@400;600&display=swap">
+
+<style>
+/* =====================================================================
+   L’HÔTEL DES ÉLECTRONS — Seconde, physique-chimie (classe inversée)
+   Image du chapitre : l’atome est un hôtel. Les couches sont les étages,
+   les sous-couches sont les chambres (s : 2 places, p : 6 places),
+   les électrons sont les clients. Le tableau périodique est le registre.
+   Couleurs porteuses de sens : corail = bloc s, sarcelle = bloc p,
+   or = électron. Le sens n’est jamais porté par la couleur seule
+   (noms 1s, 2p… et lettres s / p toujours écrits).
+   ===================================================================== */
+:root{
+  --fond:#f2f1f7;        /* gris lavande */
+  --papier:#ffffff;
+  --encre:#1d1b2f;
+  --doux:#5c5a73;
+  --trait:#d8d5e6;
+  --accent:#3d3a9e;      /* encre indigo de la réception */
+  --accent-doux:#e8e7f7;
+  --laiton:#a8731c;      /* laiton de l’enseigne */
+  --electron:#e3a82b;
+  --electron-bord:#7a5300;
+  --bloc-s:#c4502c;  --bloc-s-doux:#fbe6dd;
+  --bloc-p:#17807e;  --bloc-p-doux:#d9f0ee;
+  --ok:#157a3a;
+  --ko:#b3261e;
+  --bandeau:#16152b;
+  --bandeau-texte:#f1eefb;
+
+  --f-titre:"Unbounded", "Segoe UI", system-ui, sans-serif;
+  --f-texte:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --taille:1.0625rem;
+  --interligne:1.6;
+  --espacement-mots:normal;
+  --alignement:justify;  /* texte du cours justifié (consigne du professeur) */
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --fond:#121120; --papier:#1b1a2d; --encre:#ebe9f7; --doux:#a7a4c2; --trait:#34314f;
+    --accent:#a9a6ff; --accent-doux:#25234a; --laiton:#e2b354;
+    --electron:#f2c14e; --electron-bord:#fbe3a0;
+    --bloc-s:#f0875f; --bloc-s-doux:#3b231d; --bloc-p:#4fc2bf; --bloc-p-doux:#14322f;
+    --ok:#5fd38a; --ko:#ff8a80; --bandeau:#0b0a17; --bandeau-texte:#ece9fb;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --fond:#121120; --papier:#1b1a2d; --encre:#ebe9f7; --doux:#a7a4c2; --trait:#34314f;
+  --accent:#a9a6ff; --accent-doux:#25234a; --laiton:#e2b354;
+  --electron:#f2c14e; --electron-bord:#fbe3a0;
+  --bloc-s:#f0875f; --bloc-s-doux:#3b231d; --bloc-p:#4fc2bf; --bloc-p-doux:#14322f;
+  --ok:#5fd38a; --ko:#ff8a80; --bandeau:#0b0a17; --bandeau-texte:#ece9fb;
+  color-scheme:dark;
+}
+
+/* ---------- Réglages d’accessibilité (choisis par l’élève) ---------- */
+:root[data-taille="1"]{--taille:1.2rem}
+:root[data-taille="2"]{--taille:1.35rem}
+:root[data-taille="3"]{--taille:1.55rem}
+:root[data-police="dys"]{--f-texte:"Lexend", "Atkinson Hyperlegible", system-ui, sans-serif; --interligne:1.9; --espacement-mots:.16em; --alignement:left}
+:root[data-contraste="fort"]{
+  --fond:#ffffff; --papier:#ffffff; --encre:#000000; --doux:#1a1a1a; --trait:#000000;
+  --accent:#1a1480; --accent-doux:#ffffff; --laiton:#5c3b00;
+  --electron:#ffc400; --electron-bord:#000000;
+  --bloc-s:#8f2a00; --bloc-s-doux:#ffffff; --bloc-p:#00504e; --bloc-p-doux:#ffffff;
+  --ok:#005a1f; --ko:#8f0000; --bandeau:#000000; --bandeau-texte:#ffffff; color-scheme:light;
+}
+:root[data-mouvement="reduit"] *{transition:none!important; animation:none!important; scroll-behavior:auto!important}
+@media (prefers-reduced-motion: reduce){ *{transition:none!important; animation:none!important} }
+
+/* ---------- Base ---------- */
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--fond); color:var(--encre);
+  font-family:var(--f-texte); font-size:var(--taille); line-height:var(--interligne);
+  word-spacing:var(--espacement-mots);
+}
+h1,h2,h3{font-family:var(--f-titre); line-height:1.2; text-wrap:balance; margin:0; font-weight:700}
+h2{font-size:1.35em}
+h3{font-size:1.05em; margin-top:1.4em}
+p{margin:.6em 0}
+sub,sup{font-size:.72em; line-height:0}
+button,input,select{font:inherit; color:inherit}
+:focus-visible{outline:3px solid var(--accent); outline-offset:2px}
+.cache-visuel{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap}
+.enveloppe{max-width:56rem; margin:0 auto; padding-left:max(16px, env(safe-area-inset-left,0px)); padding-right:max(16px, env(safe-area-inset-right,0px))}
+.cfg{white-space:nowrap; font-weight:700; letter-spacing:.02em}
+.s-txt{color:var(--bloc-s); font-weight:700}
+.p-txt{color:var(--bloc-p); font-weight:700}
+
+/* ---------- Bandeau : façade de l’hôtel ---------- */
+.bandeau{position:relative; background:var(--bandeau); color:var(--bandeau-texte); overflow:hidden}
+.bandeau .enveloppe{position:relative; padding-block:26px 22px; display:grid; grid-template-columns:minmax(0,1fr) auto; gap:20px; align-items:center}
+.surtitre{font-size:.78em; letter-spacing:.14em; text-transform:uppercase; opacity:.85}
+.bandeau h1{font-size:clamp(1.7rem, 5.4vw, 2.9rem); margin:.2em 0 .25em; letter-spacing:.01em}
+.bandeau h1 em{font-style:normal; color:#e2b354}
+.bandeau p{max-width:36rem; margin:.3em 0 0}
+.facade{width:min(15rem, 32vw); height:auto}
+@media (max-width:560px){ .bandeau .enveloppe{grid-template-columns:1fr} .facade{display:none} }
+.etat{display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; align-items:center}
+.pastille{display:inline-flex; gap:6px; align-items:center; border:1px solid currentColor; border-radius:999px; padding:3px 12px; font-size:.85em; font-variant-numeric:tabular-nums}
+.pastille.faite{background:var(--bandeau-texte); color:var(--bandeau); border-color:var(--bandeau-texte)}
+.fenetre{transition:fill .3s}
+@keyframes allumage{from{opacity:.15} to{opacity:1}}
+.fenetre.allumee{animation:allumage .5s both}
+
+/* ---------- Barre d’outils et onglets ---------- */
+body::before{content:""; position:fixed; inset:0 0 auto; height:env(safe-area-inset-top,0px); z-index:10; background:var(--papier)}
+.barre{position:sticky; top:env(safe-area-inset-top,0px); z-index:5; background:var(--papier); border-bottom:1px solid var(--trait)}
+.barre .enveloppe{display:flex; flex-wrap:wrap; gap:6px; padding-block:8px; align-items:center}
+.onglets{display:flex; flex-wrap:wrap; gap:6px; flex:1 1 auto}
+.onglet{border:1px solid var(--trait); background:transparent; border-radius:8px; padding:6px 12px; cursor:pointer}
+.onglet[aria-selected="true"]{background:var(--accent); border-color:var(--accent); color:var(--papier)}
+.onglet:disabled{opacity:.5; cursor:not-allowed}
+.outil{border:1px solid var(--accent); color:var(--accent); background:transparent; border-radius:8px; padding:6px 12px; cursor:pointer}
+.confort{border-top:1px solid var(--trait); background:var(--accent-doux)}
+.confort .enveloppe{display:grid; gap:10px 18px; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); padding-block:12px}
+.confort fieldset{border:0; margin:0; padding:0}
+.confort legend{font-weight:700; font-size:.9em; margin-bottom:4px}
+.choix{display:flex; flex-wrap:wrap; gap:6px}
+.choix button{border:1px solid var(--trait); background:var(--papier); border-radius:6px; padding:3px 10px; cursor:pointer}
+.choix button[aria-pressed="true"]{border-color:var(--accent); background:var(--accent); color:var(--papier)}
+
+/* ---------- Sections ---------- */
+main{padding-block:24px 64px}
+.partie > * + *{margin-top:14px}
+.objectif{color:var(--doux); font-size:.95em}
+.etape{display:flex; gap:10px; align-items:baseline; margin-top:28px; padding-top:12px; border-top:2px solid var(--encre)}
+.etape .num{font-family:var(--f-titre); font-size:.8em; color:var(--papier); background:var(--accent); border-radius:6px; padding:2px 8px; flex:none}
+.essentiel{background:var(--accent-doux); border:1px solid var(--accent); border-radius:10px; padding:12px 16px}
+.essentiel h3{margin:0 0 .3em; font-size:.8em; letter-spacing:.08em; text-transform:uppercase; color:var(--accent)}
+.essentiel ul{margin:.2em 0; padding-left:1.2em}
+.cours{background:var(--papier); border:1px solid var(--trait); border-radius:10px; padding:4px 18px 16px}
+.cours p, .cours li, .observe p{text-align:var(--alignement); hyphens:auto}
+.lire{border:1px solid var(--trait); background:var(--papier); border-radius:6px; padding:2px 10px; font-size:.85em; cursor:pointer; color:var(--doux)}
+.defile{overflow-x:auto}
+table{border-collapse:collapse; width:100%; font-size:.92em}
+th,td{border-bottom:1px solid var(--trait); padding:6px 8px; text-align:left; vertical-align:top}
+th{font-size:.8em; text-transform:uppercase; letter-spacing:.05em; color:var(--doux)}
+td.num{font-variant-numeric:tabular-nums}
+.methode{border-left:4px solid var(--accent); padding:4px 0 4px 12px; margin:10px 0}
+.methode ol{margin:.3em 0; padding-left:1.3em}
+.piege{border:1px solid var(--ko); border-radius:10px; padding:6px 14px; margin:10px 0}
+.piege b.titre{color:var(--ko)}
+details.loin{border:1px dashed var(--accent); border-radius:10px; padding:8px 14px}
+details.loin summary{cursor:pointer; font-weight:700; color:var(--accent)}
+.ordre-remplissage{display:flex; flex-wrap:wrap; gap:6px; align-items:center; justify-content:center; margin:10px 0; font-weight:700}
+.ordre-remplissage span.sc{border:2px solid; border-radius:6px; padding:2px 10px}
+.ordre-remplissage span.sc.s{border-color:var(--bloc-s); background:var(--bloc-s-doux)}
+.ordre-remplissage span.sc.p{border-color:var(--bloc-p); background:var(--bloc-p-doux)}
+
+/* ---------- L’hôtel (atome) ---------- */
+.hotel{display:grid; gap:6px; background:var(--papier); border:2px solid var(--encre); border-radius:14px 14px 4px 4px; padding:10px 12px 8px; max-width:31rem; position:relative}
+.enseigne{font-family:var(--f-titre); font-size:.72em; letter-spacing:.12em; text-transform:uppercase; text-align:center; color:var(--laiton); border-bottom:1px solid var(--trait); padding-bottom:4px}
+.etage{display:grid; grid-template-columns:6.2rem minmax(0,1fr); gap:8px; align-items:center; padding-bottom:6px; border-bottom:1px dashed var(--trait)}
+.etage-nom{font-size:.8em; color:var(--doux); line-height:1.25}
+.etage-nom b{display:block; color:var(--encre); font-size:1.1em}
+.chambres{display:flex; flex-wrap:wrap; gap:8px}
+.chambre{position:relative; border:2px solid var(--bloc-s); background:var(--bloc-s-doux); border-radius:8px; padding:4px 7px; display:grid; gap:3px; justify-items:center; min-width:4.2rem}
+.chambre.p{border-color:var(--bloc-p); background:var(--bloc-p-doux)}
+.porte{font-weight:700; font-size:.85em; line-height:1}
+.porte small{font-weight:400; color:var(--doux)}
+.places{display:flex; gap:4px}
+.place{width:1.05rem; height:1.05rem; border-radius:50%; border:2px dashed var(--doux); transition:background .2s}
+.place.pleine{border:2px solid var(--electron-bord); background:var(--electron)}
+.commandes{display:flex; gap:4px}
+.commandes button{width:2rem; height:1.8rem; border:1px solid var(--encre); background:var(--papier); border-radius:6px; cursor:pointer; font-weight:700; line-height:1}
+.commandes button:disabled{opacity:.35; cursor:not-allowed}
+.chambre .rang{position:absolute; top:-9px; left:-9px; width:1.3rem; height:1.3rem; border-radius:50%; background:var(--laiton); color:var(--papier); font-size:.72em; font-weight:700; display:none; place-items:center}
+.hotel.montrer-ordre .rang{display:grid}
+.chambre.derniere{outline:3px solid var(--accent); outline-offset:2px}
+.chambre.fausse{outline:3px solid var(--ko); outline-offset:2px}
+.hall{text-align:center; font-size:.82em; background:var(--accent-doux); border-radius:6px; padding:4px}
+.hotel.mini{font-size:.82em; max-width:22rem; padding:8px}
+.hotel.mini .etage{grid-template-columns:3.4rem minmax(0,1fr)}
+.hotel.mini .etage-nom span{display:none}
+.hotel.mini .etage-nom b{white-space:nowrap}
+.hotel.mini .place{width:.85rem; height:.85rem}
+@media (max-width:440px){ .etage{grid-template-columns:1fr} .etage-nom b{display:inline; margin-right:.5em} }
+.lecture{font-size:.95em}
+.lecture output{font-variant-numeric:tabular-nums}
+
+/* ---------- Simulateur (partie 1) ---------- */
+.simulateur{display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1.3fr); gap:16px; align-items:start; background:var(--papier); border:1px solid var(--trait); border-radius:12px; padding:14px}
+@media (max-width:700px){ .simulateur{grid-template-columns:minmax(0,1fr)} }
+.commande-z{display:flex; gap:8px; align-items:center; flex-wrap:wrap}
+.commande-z input[type=range]{flex:1 1 8rem; accent-color:var(--accent)}
+.commande-z button{border:1px solid var(--encre); background:var(--papier); border-radius:8px; padding:4px 10px; cursor:pointer}
+.fiche{border:2px solid var(--encre); border-radius:10px; padding:10px 12px; display:grid; gap:2px; justify-items:start}
+.fiche .sym{font-family:var(--f-titre); font-size:2.2em; line-height:1}
+.fiche .z{font-variant-numeric:tabular-nums; color:var(--doux)}
+.observe{border:1px solid var(--trait); border-radius:10px; padding:8px 14px; background:var(--papier)}
+.observe summary{cursor:pointer; font-weight:700}
+.observe summary::marker{color:var(--accent)}
+.observe .reponse-obs{border-left:3px solid var(--laiton); padding-left:10px}
+
+/* ---------- Le registre (tableau périodique) ---------- */
+.tp{display:grid; grid-template-columns:2.7rem repeat(2, minmax(2.35rem,1fr)) 1.3rem repeat(6, minmax(2.35rem,1fr)); gap:4px; min-width:24.5rem; align-items:center}
+.tp .entete{font-size:.72em; text-align:center; color:var(--doux); font-variant-numeric:tabular-nums}
+.tp .lig{font-size:.72em; color:var(--doux); line-height:1.2}
+.tp .ellipse{text-align:center; color:var(--doux)}
+.case{aspect-ratio:1; max-width:100%; border:2px solid var(--trait); border-radius:7px; background:var(--papier); display:grid; place-items:center; align-content:center; line-height:1.1; cursor:pointer; padding:2px; position:relative}
+.case .z{font-size:.62em; color:var(--doux)}
+.case b{font-size:1em}
+@media (max-width:480px){
+  .tp{grid-template-columns:2.1rem repeat(2, minmax(1.9rem,1fr)) .9rem repeat(6, minmax(1.9rem,1fr)); gap:3px; min-width:0; font-size:.88em}
+  .case{border-radius:5px}
+}
+.case .contenu{display:grid; place-items:center; line-height:1.1}
+.case.s{border-color:var(--bloc-s); background:var(--bloc-s-doux)}
+.case.p{border-color:var(--bloc-p); background:var(--bloc-p-doux)}
+.tp.quiz .case{border-color:var(--trait); background:var(--papier)}
+.tp.quiz.revele .case.s{border-color:var(--bloc-s); background:var(--bloc-s-doux)}
+.tp.quiz.revele .case.p{border-color:var(--bloc-p); background:var(--bloc-p-doux)}
+.case[aria-pressed="true"]{outline:3px solid var(--accent); outline-offset:1px}
+.case.juste{outline:3px solid var(--ok); outline-offset:1px}
+.case.fausse{outline:3px solid var(--ko); outline-offset:1px}
+.case.piste{box-shadow:inset 0 0 0 3px var(--laiton)}
+.case:disabled{cursor:default}
+.legende-blocs{display:flex; flex-wrap:wrap; gap:12px; font-size:.85em; margin:6px 0}
+.legende-blocs span::before{content:""; display:inline-block; width:.9em; height:.9em; border-radius:3px; margin-right:5px; vertical-align:-1px; border:2px solid}
+.legende-blocs .ls::before{border-color:var(--bloc-s); background:var(--bloc-s-doux)}
+.legende-blocs .lp::before{border-color:var(--bloc-p); background:var(--bloc-p-doux)}
+.explorateur{display:grid; grid-template-columns:minmax(0,1.45fr) minmax(0,1fr); gap:16px; align-items:start; background:var(--papier); border:1px solid var(--trait); border-radius:12px; padding:14px}
+@media (max-width:760px){ .explorateur{grid-template-columns:minmax(0,1fr)} }
+.deduction{list-style:none; padding:0; margin:8px 0; display:grid; gap:4px}
+.deduction li{border-left:3px solid var(--accent); padding-left:8px; text-align:left}
+
+/* ---------- Questionnaire ---------- */
+.quiz{background:var(--papier); border:2px solid var(--encre); border-radius:12px; padding:6px 18px 18px}
+.quiz-tete{display:flex; flex-wrap:wrap; justify-content:space-between; gap:8px; align-items:baseline}
+.question{border-top:1px solid var(--trait); padding-top:14px; margin-top:14px}
+.question .enonce{font-weight:700}
+.options{display:grid; gap:6px; margin:8px 0}
+.option{display:block; width:100%; text-align:left; border:1px solid var(--trait); background:var(--papier); border-radius:8px; padding:8px 12px; cursor:pointer}
+.option:hover:not(:disabled){border-color:var(--accent)}
+.option:disabled{cursor:default}
+.option.juste{border:2px solid var(--ok); background:color-mix(in srgb, var(--ok) 14%, var(--papier))}
+.option.fausse{border:2px solid var(--ko); background:color-mix(in srgb, var(--ko) 12%, var(--papier))}
+.option.retiree{text-decoration:line-through; opacity:.45}
+.option.juste::after{content:"  ✓ bonne réponse"; font-weight:700; color:var(--ok)}
+.option.fausse::after{content:"  ✗ ton choix"; font-weight:700; color:var(--ko)}
+.trou{font-size:1.15em; padding:8px; margin:8px 0; border-radius:8px; background:var(--fond); line-height:2.6}
+.trou select{font:inherit; font-size:.75em; vertical-align:super; padding:0 4px; border:2px dashed var(--accent); border-radius:6px; background:var(--papier); color:var(--encre)}
+.trou select.juste{border:2px solid var(--ok)}
+.trou select.fausse{border:2px solid var(--ko)}
+.zone-action{display:grid; gap:8px; margin:8px 0; justify-items:start}
+.zone-action > *{max-width:100%; min-width:0}
+.aides{display:flex; flex-wrap:wrap; gap:6px}
+.aide{border:1px dashed var(--doux); background:transparent; border-radius:6px; padding:2px 10px; font-size:.85em; cursor:pointer; color:var(--doux)}
+.indice{background:var(--accent-doux); border-radius:8px; padding:6px 10px; font-size:.95em}
+.solution{display:none; font-size:.85em; color:var(--ko); border-left:3px solid var(--ko); padding-left:8px; margin-top:6px}
+.voir-reponses .solution{display:block}
+.retour{margin-top:6px}
+.retour.ok{color:var(--ok)} .retour.ko{color:var(--ko)}
+.retour span{color:var(--encre)}
+.resultat{margin-top:16px; padding:12px 14px; border-radius:10px; border:2px solid var(--trait)}
+.resultat.reussi{border-color:var(--ok)} .resultat.rate{border-color:var(--ko)}
+.btn{border:0; background:var(--accent); color:var(--papier); border-radius:8px; padding:8px 16px; cursor:pointer; font-weight:700}
+.btn.secondaire{background:transparent; color:var(--accent); border:1px solid var(--accent)}
+.btn:disabled{opacity:.5; cursor:not-allowed}
+
+/* ---------- Accueil et bilan ---------- */
+.formulaire{display:grid; gap:10px; grid-template-columns:repeat(auto-fit,minmax(11rem,1fr))}
+.formulaire label{display:grid; gap:4px; font-weight:700; font-size:.92em}
+.formulaire input{padding:8px 10px; border:1px solid var(--trait); border-radius:8px; background:var(--papier); font-weight:400}
+.message{font-size:.95em}
+.message.erreur{color:var(--ko)}
+.boutons-bilan{display:flex; flex-wrap:wrap; gap:8px}
+textarea{width:100%; min-height:8rem; font:.85em/1.4 ui-monospace, monospace; border:1px solid var(--trait); border-radius:8px; padding:8px; background:var(--papier); color:var(--encre)}
+
+/* ---------- Aide-mémoire ---------- */
+dialog{border:1px solid var(--trait); border-radius:12px; background:var(--papier); color:var(--encre); max-width:min(46rem, calc(100vw - 24px)); padding:0}
+dialog::backdrop{background:rgba(10,10,25,.55)}
+.dialog-corps{padding:16px 18px; max-height:80vh; overflow:auto}
+
+/* ---------- Mode professeur ---------- */
+.prof{position:fixed; z-index:20; right:calc(12px + env(safe-area-inset-right,0px)); bottom:calc(12px + env(safe-area-inset-bottom,0px));
+  background:var(--papier); color:var(--encre); border:2px dashed var(--ko); border-radius:10px; padding:10px 12px; width:min(17rem, calc(100vw - 24px)); font-size:.85rem; box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.prof b{color:var(--ko)}
+.prof summary{cursor:pointer}
+.prof-boutons{display:grid; gap:5px; margin-top:6px}
+.prof-boutons button{border:1px solid var(--trait); background:var(--fond); border-radius:6px; padding:4px 8px; cursor:pointer; text-align:left}
+</style>
+</head>
+
+<body>
+
+<!-- ============================ BANDEAU ============================ -->
+<header class="bandeau">
+  <div class="enveloppe">
+    <div>
+      <div class="surtitre">Physique-chimie · Seconde · Le cortège électronique</div>
+      <h1>L’Hôtel des <em>électrons</em></h1>
+      <p>Dans cet hôtel, chaque atome loge ses électrons étage par étage. Apprends à les ranger, puis découvre comment la façon dont ils sont rangés donne la place de l’élément dans le tableau périodique.</p>
+      <div class="etat" aria-live="polite">
+        <span class="pastille" id="pastille-1">Partie 1 : à faire</span>
+        <span class="pastille" id="pastille-2">Partie 2 : à faire</span>
+        <span class="pastille" id="chrono" title="Temps passé">⏱ 00:00</span>
+      </div>
+    </div>
+    <svg class="facade" id="facade" viewBox="0 0 240 230" aria-hidden="true"></svg>
+  </div>
+</header>
+
+<!-- ======================= BARRE D’OUTILS ========================== -->
+<div class="barre">
+  <div class="enveloppe">
+    <div class="onglets" role="tablist" aria-label="Parties">
+      <button class="onglet" role="tab" id="onglet-accueil" data-cible="accueil">Accueil</button>
+      <button class="onglet" role="tab" id="onglet-p1" data-cible="p1">1 · Ranger les électrons</button>
+      <button class="onglet" role="tab" id="onglet-p2" data-cible="p2">2 · Le tableau périodique</button>
+      <button class="onglet" role="tab" id="onglet-bilan" data-cible="bilan">Bilan</button>
+    </div>
+    <button class="outil" id="bouton-aide" type="button">Aide-mémoire</button>
+    <button class="outil" id="bouton-confort" type="button" aria-expanded="false" aria-controls="confort">Confort de lecture</button>
+  </div>
+  <div class="confort" id="confort" hidden>
+    <div class="enveloppe">
+      <fieldset><legend>Taille du texte</legend>
+        <div class="choix" data-reglage="taille">
+          <button type="button" data-valeur="0">A</button><button type="button" data-valeur="1">A+</button>
+          <button type="button" data-valeur="2">A++</button><button type="button" data-valeur="3">A+++</button>
+        </div></fieldset>
+      <fieldset><legend>Police</legend>
+        <div class="choix" data-reglage="police">
+          <button type="button" data-valeur="standard">Standard</button>
+          <button type="button" data-valeur="dys">Adaptée (dys), plus espacée</button>
+        </div></fieldset>
+      <fieldset><legend>Contraste</legend>
+        <div class="choix" data-reglage="contraste">
+          <button type="button" data-valeur="normal">Normal</button><button type="button" data-valeur="fort">Renforcé</button>
+        </div></fieldset>
+      <fieldset><legend>Animations</legend>
+        <div class="choix" data-reglage="mouvement">
+          <button type="button" data-valeur="normal">Oui</button><button type="button" data-valeur="reduit">Non</button>
+        </div></fieldset>
+      <fieldset><legend>Chronomètre</legend>
+        <div class="choix" data-reglage="chrono">
+          <button type="button" data-valeur="visible">Affiché</button><button type="button" data-valeur="masque">Masqué</button>
+        </div></fieldset>
+      <fieldset><legend>Lecture à voix haute</legend>
+        <div class="choix"><button type="button" id="stop-voix">■ Arrêter la lecture</button></div>
+        <small>Les boutons « 🔊 Écouter » lisent le cours et les questions.</small></fieldset>
+    </div>
+  </div>
+</div>
+
+<main class="enveloppe">
+
+<!-- ============================ ACCUEIL ============================ -->
+<section class="partie" id="accueil" role="tabpanel" aria-labelledby="onglet-accueil">
+  <h2>Bienvenue à l’Hôtel des électrons</h2>
+  <p>Ce jeu se fait <b>avant le cours en classe</b>. Chaque partie se déroule en trois étapes :</p>
+  <ol>
+    <li><b>Découvre</b> : manipule l’hôtel ou le tableau, et réponds aux questions d’observation sur ta feuille avant de vérifier.</li>
+    <li><b>Retiens</b> : lis l’essentiel et le cours.</li>
+    <li><b>Entraîne-toi</b> : réponds à un questionnaire de <b>6 questions</b>. Il faut au moins <b>5 bonnes réponses sur 6 (80 %)</b> pour débloquer la partie suivante.</li>
+  </ol>
+  <ul>
+    <li>Une réponse validée ne peut plus être changée. Si tu n’atteins pas 80 %, tu recommences avec <b>de nouvelles questions</b>.</li>
+    <li>Sous chaque question, deux aides sont possibles. Elles ne font pas perdre de point, mais ton professeur voit combien tu en as utilisé.</li>
+    <li>Le bouton <b>Aide-mémoire</b> (en haut) rappelle les règles du chapitre. Le bouton <b>Confort de lecture</b> permet d’agrandir le texte, de changer de police, de renforcer le contraste ou d’écouter le texte.</li>
+    <li>Ta progression est sauvegardée sur cet appareil.</li>
+    <li><b>Ton activité est enregistrée</b> : le temps passé sur chaque question, les sorties de la page (changement d’onglet ou d’application) et les copies de texte. Ces informations sont transmises à ton professeur avec tes résultats. Reste sur la page et réponds seul·e.</li>
+  </ul>
+  <h3>Qui es-tu ?</h3>
+  <form id="identite" class="formulaire" novalidate>
+    <label for="prenom">Prénom<input id="prenom" autocomplete="given-name" required></label>
+    <label for="nom">Première lettre du nom de famille<input id="nom" maxlength="1" autocomplete="off" placeholder="ex. M" required></label>
+    <label for="classe">Classe<input id="classe" placeholder="ex. 2de 3" required></label>
+  </form>
+  <p class="message" id="message-identite" aria-live="polite"></p>
+  <button class="btn" id="commencer" type="button">Entrer dans l’hôtel</button>
+</section>
+
+<!-- ===================== PARTIE 1 : CONFIGURATION ===================== -->
+<section class="partie" id="p1" role="tabpanel" aria-labelledby="onglet-p1" hidden>
+  <h2>Partie 1 · Ranger les électrons d’un atome (Z ≤ 18)</h2>
+  <p class="objectif">Objectif : écrire la configuration électronique (1s, 2s, 2p, 3s, 3p) d’un atome à l’état fondamental.</p>
+
+  <h3 class="etape"><span class="num">Étape 1</span> Découvre : l’hôtel se remplit</h3>
+  <p>Un atome de numéro atomique Z possède Z électrons. Choisis un atome avec le curseur et regarde comment ses électrons s’installent dans l’hôtel. Les étages sont les <b>couches</b> (n = 1, 2, 3) et les chambres sont les <b>sous-couches</b> (s et p). Chaque rond doré est un électron.</p>
+  <div class="simulateur">
+    <div>
+      <div class="commande-z">
+        <button type="button" id="z-moins" aria-label="Atome précédent">◀</button>
+        <label class="cache-visuel" for="z-sim">Numéro atomique Z</label>
+        <input type="range" id="z-sim" min="1" max="18" value="1">
+        <button type="button" id="z-plus" aria-label="Atome suivant">▶</button>
+      </div>
+      <p><button type="button" class="btn secondaire" id="z-animer">▶ Remplir l’hôtel de Z = 1 à 18</button></p>
+      <div class="fiche" aria-live="polite">
+        <span class="z" id="sim-z">Z = 1</span>
+        <span class="sym" id="sim-sym">H</span>
+        <span id="sim-nom">hydrogène</span>
+        <span>Configuration : <span class="cfg" id="sim-cfg"></span></span>
+      </div>
+    </div>
+    <div id="sim-hotel"></div>
+  </div>
+
+  <p><b>Observe, puis écris ta réponse sur ta feuille avant d’ouvrir la vérification.</b></p>
+  <details class="observe"><summary>Observation 1 : dans quel ordre les chambres se remplissent-elles ?</summary>
+    <p class="reponse-obs">Toujours dans le même ordre : <b>1s, puis 2s, puis 2p, puis 3s, puis 3p</b>. On ne passe à la chambre suivante que lorsque la précédente est pleine.</p></details>
+  <details class="observe"><summary>Observation 2 : combien d’électrons, au maximum, dans une chambre s ? dans une chambre p ?</summary>
+    <p class="reponse-obs">Une sous-couche <span class="s-txt">s</span> contient au maximum <b>2 électrons</b>, une sous-couche <span class="p-txt">p</span> au maximum <b>6 électrons</b>.</p></details>
+  <details class="observe"><summary>Observation 3 : pour le sodium (Z = 11), additionne les petits nombres écrits en haut dans la configuration. Que trouves-tu ?</summary>
+    <p class="reponse-obs">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>1</sup> : 2 + 2 + 6 + 1 = <b>11 = Z</b>. Les exposants comptent les électrons de chaque sous-couche, et leur somme est le nombre total d’électrons de l’atome.</p></details>
+  <details class="observe"><summary>Observation 4 : à partir de quel atome un électron s’installe-t-il au 3e étage ?</summary>
+    <p class="reponse-obs">À partir du sodium (Z = 11) : les 10 premiers électrons remplissent complètement les étages 1 et 2 (2 + 8 = 10).</p></details>
+
+  <h3 class="etape"><span class="num">Étape 2</span> Retiens</h3>
+  <div class="essentiel">
+    <h3>L’essentiel</h3>
+    <ul>
+      <li>Les électrons d’un atome se répartissent sur des <b>couches</b> numérotées n = 1, 2, 3… Chaque couche est formée de <b>sous-couches</b> notées s et p.</li>
+      <li>Une sous-couche <span class="s-txt">s</span> contient au maximum <b>2</b> électrons, une sous-couche <span class="p-txt">p</span> au maximum <b>6</b> électrons.</li>
+      <li>À l’état fondamental, on remplit dans l’ordre <b>1s → 2s → 2p → 3s → 3p</b>, chaque sous-couche étant pleine avant de passer à la suivante.</li>
+      <li>On écrit le nombre d’électrons en exposant : sodium (Z = 11) : <span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>1</sup></span>. La somme des exposants vaut Z.</li>
+    </ul>
+  </div>
+
+  <article class="cours" id="cours-p1">
+    <p><button class="lire" type="button" data-lire="cours-p1">🔊 Écouter le cours</button></p>
+
+    <h3>1. Le cortège électronique</h3>
+    <p>Un atome de numéro atomique Z contient Z protons dans son noyau et, comme il est neutre, Z électrons autour. L’ensemble de ces électrons s’appelle le <b>cortège électronique</b>. Les électrons ne sont pas placés n’importe comment : ils se répartissent sur des couches, elles-mêmes divisées en sous-couches.</p>
+    <p>L’hôtel du jeu est une <b>image</b> pour retenir ce modèle : les étages représentent les couches, les chambres représentent les sous-couches et les places représentent le nombre maximal d’électrons.</p>
+    <div class="defile"><table>
+      <thead><tr><th>Couche</th><th>Sous-couches</th><th>Nombre maximal d’électrons</th></tr></thead>
+      <tbody>
+        <tr><td>n = 1</td><td><span class="s-txt">1s</span></td><td>2</td></tr>
+        <tr><td>n = 2</td><td><span class="s-txt">2s</span> et <span class="p-txt">2p</span></td><td>2 + 6 = 8</td></tr>
+        <tr><td>n = 3</td><td><span class="s-txt">3s</span> et <span class="p-txt">3p</span></td><td>2 + 6 = 8 (jusqu’à Z = 18)</td></tr>
+      </tbody>
+    </table></div>
+    <p>Dans le nom d’une sous-couche, le <b>chiffre</b> est le numéro n de la couche et la <b>lettre</b> (s ou p) est le type de sous-couche : 2p est la sous-couche p de la couche n = 2.</p>
+
+    <h3>2. L’ordre de remplissage</h3>
+    <p>À l’<b>état fondamental</b> (l’état le plus stable de l’atome, celui de plus basse énergie), les électrons occupent les sous-couches dans l’ordre suivant, en remplissant complètement une sous-couche avant de passer à la suivante :</p>
+    <div class="ordre-remplissage" aria-label="Ordre de remplissage : 1s, 2s, 2p, 3s, 3p">
+      <span class="sc s">1s</span>→<span class="sc s">2s</span>→<span class="sc p">2p</span>→<span class="sc s">3s</span>→<span class="sc p">3p</span>
+    </div>
+
+    <h3>3. Écrire une configuration électronique</h3>
+    <p>La <b>configuration électronique</b> indique la répartition des électrons : on écrit chaque sous-couche occupée avec, en exposant, le nombre d’électrons qu’elle contient.</p>
+    <div class="methode"><b>Méthode</b> (exemple : le chlore, Z = 17)
+      <ol>
+        <li>Je compte les électrons à placer : Z = 17, donc 17 électrons.</li>
+        <li>Je remplis dans l’ordre, en respectant les maximums : 1s : 2 (reste 15) ; 2s : 2 (reste 13) ; 2p : 6 (reste 7) ; 3s : 2 (reste 5) ; 3p : 5 (reste 0).</li>
+        <li>J’écris : <span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>5</sup></span>.</li>
+        <li>Je vérifie : 2 + 2 + 6 + 2 + 5 = 17 = Z.</li>
+      </ol>
+    </div>
+    <div class="defile"><table>
+      <thead><tr><th>Atome</th><th>Z</th><th>Configuration électronique</th></tr></thead>
+      <tbody>
+        <tr><td>hydrogène H</td><td class="num">1</td><td><span class="cfg">1s<sup>1</sup></span></td></tr>
+        <tr><td>carbone C</td><td class="num">6</td><td><span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>2</sup></span></td></tr>
+        <tr><td>oxygène O</td><td class="num">8</td><td><span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>4</sup></span></td></tr>
+        <tr><td>néon Ne</td><td class="num">10</td><td><span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup></span></td></tr>
+        <tr><td>magnésium Mg</td><td class="num">12</td><td><span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup></span></td></tr>
+        <tr><td>argon Ar</td><td class="num">18</td><td><span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup></span></td></tr>
+      </tbody>
+    </table></div>
+    <p>La <b>couche externe</b> est la dernière couche occupée, celle qui a le plus grand numéro n. Pour le chlore, c’est la couche n = 3.</p>
+    <div class="piege"><b class="titre">Pièges fréquents</b>
+      <ul>
+        <li>2p<sup>7</sup> ou 2s<sup>3</sup> sont impossibles : une sous-couche p contient au plus 6 électrons, une sous-couche s au plus 2.</li>
+        <li>On ne saute pas de sous-couche : 1s<sup>2</sup> 2p<sup>1</sup> n’est pas la configuration du lithium à l’état fondamental (c’est 1s<sup>2</sup> 2s<sup>1</sup>).</li>
+        <li>Ne confonds pas le chiffre devant la lettre (numéro de la couche) et l’exposant (nombre d’électrons).</li>
+      </ul>
+    </div>
+  </article>
+
+  <details class="loin">
+    <summary>Pour aller plus loin (vers la première)</summary>
+    <p>Après 3p, le remplissage continue avec la sous-couche 4s : le potassium (Z = 19) a pour configuration 1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>1</sup>. Il existe aussi des sous-couches d (10 électrons au maximum), qui commencent à se remplir avec la 3d après la 4s : ce sont elles qui expliquent les colonnes 3 à 12 du tableau périodique.</p>
+  </details>
+
+  <h3 class="etape"><span class="num">Étape 3</span> Entraîne-toi</h3>
+  <div class="quiz" id="quiz-p1"></div>
+</section>
+
+<!-- ===================== PARTIE 2 : TABLEAU PÉRIODIQUE ===================== -->
+<section class="partie" id="p2" role="tabpanel" aria-labelledby="onglet-p2" hidden>
+  <h2>Partie 2 · De la configuration au tableau périodique</h2>
+  <p class="objectif">Objectif : déterminer la position d’un élément dans le tableau périodique (ligne, colonne, bloc s ou p) à partir de la configuration électronique de son atome.</p>
+
+  <h3 class="etape"><span class="num">Étape 1</span> Découvre : le registre de l’hôtel</h3>
+  <p>Le tableau périodique est le registre de l’hôtel : chaque case est un élément, rangé par numéro atomique croissant. Clique sur un élément pour voir comment son atome range ses électrons.</p>
+  <div class="explorateur">
+    <div>
+      <div class="defile" id="registre-decouverte"></div>
+      <div class="legende-blocs"><span class="ls">bloc s</span><span class="lp">bloc p</span></div>
+    </div>
+    <div id="detail-element" aria-live="polite"></div>
+  </div>
+
+  <p><b>Observe, puis écris ta réponse sur ta feuille avant d’ouvrir la vérification.</b></p>
+  <details class="observe"><summary>Observation 1 : compare le numéro de la ligne d’un élément et le plus grand numéro de couche de sa configuration.</summary>
+    <p class="reponse-obs">Ils sont égaux. Le sodium (1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>1</sup>) a sa dernière couche occupée n = 3 : il est dans la <b>3e ligne</b>.</p></details>
+  <details class="observe"><summary>Observation 2 : quelle sous-couche est en train de se remplir pour les éléments des cases corail ? des cases sarcelle ?</summary>
+    <p class="reponse-obs">Dans les cases corail, la dernière sous-couche occupée est une sous-couche <span class="s-txt">s</span> : c’est le <b>bloc s</b>. Dans les cases sarcelle, c’est une sous-couche <span class="p-txt">p</span> : c’est le <b>bloc p</b>.</p></details>
+  <details class="observe"><summary>Observation 3 : clique sur H, Li et Na (colonne 1). Comment se termine leur configuration ?</summary>
+    <p class="reponse-obs">Par 1s<sup>1</sup>, 2s<sup>1</sup> et 3s<sup>1</sup> : un seul électron sur la couche externe. Dans le bloc s, le numéro de la colonne est le nombre d’électrons de la dernière sous-couche s.</p></details>
+  <details class="observe"><summary>Observation 4 : clique sur F et Cl (colonne 17). Combien d’électrons ont-ils dans leur dernière sous-couche p ? Quel lien avec 17 ?</summary>
+    <p class="reponse-obs">Ils ont 5 électrons dans la sous-couche p (2p<sup>5</sup> et 3p<sup>5</sup>), et 12 + 5 = 17. Dans le bloc p, le numéro de la colonne vaut <b>12 + nombre d’électrons de la sous-couche p</b>.</p></details>
+  <details class="observe"><summary>Observation 5 : où se trouve l’hélium, et pourquoi est-ce surprenant ?</summary>
+    <p class="reponse-obs">L’hélium (1s<sup>2</sup>) devrait être en colonne 2, dans le bloc s. Il est pourtant placé en <b>colonne 18</b>, avec les gaz nobles : comme eux, sa couche externe est complète et il a les mêmes propriétés chimiques (il ne réagit presque pas).</p></details>
+
+  <h3 class="etape"><span class="num">Étape 2</span> Retiens</h3>
+  <div class="essentiel">
+    <h3>L’essentiel</h3>
+    <ul>
+      <li><b>Ligne</b> (ou période) = numéro n de la dernière couche occupée.</li>
+      <li><b>Bloc</b> = type de la dernière sous-couche occupée : <span class="s-txt">bloc s</span> (colonnes 1 et 2) ou <span class="p-txt">bloc p</span> (colonnes 13 à 18).</li>
+      <li><b>Colonne</b> : bloc s → nombre d’électrons de la dernière sous-couche s ; bloc p → <b>12 + nombre d’électrons de la sous-couche p</b>.</li>
+      <li>Exception : l’hélium (1s<sup>2</sup>) est placé dans la colonne 18, avec les gaz nobles.</li>
+    </ul>
+  </div>
+
+  <article class="cours" id="cours-p2">
+    <p><button class="lire" type="button" data-lire="cours-p2">🔊 Écouter le cours</button></p>
+
+    <h3>1. L’organisation du tableau périodique</h3>
+    <p>Dans le tableau périodique, les éléments sont rangés par numéro atomique Z croissant, ligne par ligne. Une nouvelle ligne commence chaque fois que les électrons commencent à occuper une nouvelle couche. Pour Z ≤ 18, le tableau comporte <b>3 lignes</b> et on utilise les colonnes 1, 2 puis 13 à 18 (les colonnes 3 à 12 concernent des éléments plus lourds).</p>
+
+    <h3>2. Trouver la position d’un élément à partir de sa configuration</h3>
+    <div class="methode"><b>Méthode</b> (exemple : 1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>3</sup>)
+      <ol>
+        <li><b>Ligne</b> : je repère la dernière couche occupée. Ici n = 3, donc l’élément est dans la <b>3e ligne</b>.</li>
+        <li><b>Bloc</b> : je repère la dernière sous-couche occupée. Ici 3p, donc l’élément est dans le <b>bloc p</b>.</li>
+        <li><b>Colonne</b> : bloc p, avec 3 électrons dans 3p : colonne 12 + 3 = <b>15</b>.</li>
+        <li>Je vérifie avec Z : 2 + 2 + 6 + 2 + 3 = 15. C’est le phosphore P, 3e ligne, colonne 15.</li>
+      </ol>
+    </div>
+    <div class="defile"><table>
+      <thead><tr><th>Dernière sous-couche</th><th>Bloc</th><th>Colonne</th></tr></thead>
+      <tbody>
+        <tr><td>s<sup>1</sup></td><td><span class="s-txt">s</span></td><td>1</td></tr>
+        <tr><td>s<sup>2</sup></td><td><span class="s-txt">s</span></td><td>2 (sauf l’hélium : 18)</td></tr>
+        <tr><td>p<sup>1</sup> à p<sup>6</sup></td><td><span class="p-txt">p</span></td><td>13 à 18 (12 + nombre d’électrons p)</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3>3. Le chemin inverse : de la position à la configuration</h3>
+    <p>Un élément de la 2e ligne, colonne 16 : sa dernière couche est n = 2, il est dans le bloc p avec 16 − 12 = 4 électrons dans la sous-couche 2p. Sa configuration est donc <span class="cfg">1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>4</sup></span> : c’est l’oxygène (Z = 8).</p>
+
+    <h3>4. Électrons de valence et colonnes</h3>
+    <p>Les <b>électrons de valence</b> sont les électrons de la couche externe. Le chlore (1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> <b>3s<sup>2</sup> 3p<sup>5</sup></b>) possède 2 + 5 = 7 électrons de valence.</p>
+    <p>Les éléments d’une même colonne ont le <b>même nombre d’électrons de valence</b> (sauf l’hélium) : colonnes 1 et 2 → 1 et 2 électrons de valence ; colonnes 13 à 18 → 3 à 8 électrons de valence. Ils ont des propriétés chimiques voisines et forment une <b>famille chimique</b> : les alcalins (colonne 1, sauf l’hydrogène), les halogènes (colonne 17), les gaz nobles (colonne 18).</p>
+    <div class="piege"><b class="titre">Pièges fréquents</b>
+      <ul>
+        <li>Dans le bloc p, la colonne n’est pas le nombre d’électrons de la sous-couche p : 3p<sup>5</sup> donne la colonne 17, pas la colonne 5.</li>
+        <li>Les électrons de valence sont tous ceux de la couche externe (s et p), pas seulement ceux de la dernière sous-couche.</li>
+        <li>L’hélium a 2 électrons de valence mais il est rangé en colonne 18.</li>
+      </ul>
+    </div>
+  </article>
+
+  <details class="loin">
+    <summary>Pour aller plus loin : vers les ions</summary>
+    <p>Les gaz nobles (colonne 18) ont une couche externe complète, ce qui les rend très stables. Les autres atomes gagnent ou perdent des électrons pour obtenir la même configuration que le gaz noble le plus proche. Le sodium 1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>1</sup> perd son électron 3s<sup>1</sup> : l’ion Na<sup>+</sup> a la configuration 1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup>, celle du néon. C’est la suite du chapitre.</p>
+  </details>
+
+  <h3 class="etape"><span class="num">Étape 3</span> Entraîne-toi</h3>
+  <div class="quiz" id="quiz-p2"></div>
+</section>
+
+<!-- ============================ BILAN ============================ -->
+<section class="partie" id="bilan" role="tabpanel" aria-labelledby="onglet-bilan" hidden>
+  <h2>Bilan</h2>
+  <p id="bilan-intro"></p>
+  <div class="defile"><table id="table-bilan">
+    <thead><tr><th>Partie</th><th>Réussie</th><th>Tentatives</th><th>Meilleur score</th><th>Bonnes réponses</th><th>Aides utilisées</th></tr></thead>
+    <tbody></tbody>
+  </table></div>
+  <p id="bilan-total"></p>
+  <p id="bilan-suivi" class="objectif"></p>
+  <div class="boutons-bilan">
+    <button class="btn" id="envoyer" type="button">Envoyer mes résultats</button>
+    <button class="btn secondaire" id="recommencer" type="button">Recommencer pour améliorer mes résultats</button>
+  </div>
+  <p class="message" id="message-recommencer" aria-live="polite"></p>
+  <p class="message" id="message-envoi" aria-live="polite"></p>
+  <div id="secours" hidden>
+    <p>Si l’envoi ne fonctionne pas, copie ce texte et transmets-le à ton professeur :</p>
+    <label class="cache-visuel" for="texte-secours">Résultats à copier</label>
+    <textarea id="texte-secours" readonly></textarea>
+    <button class="btn secondaire" id="copier" type="button">Copier le texte</button>
+  </div>
+  <h3>Recommencer à zéro</h3>
+  <p>Efface la progression enregistrée sur cet appareil (à utiliser si un autre élève doit faire le jeu).</p>
+  <button class="btn secondaire" id="reinitialiser" type="button">Tout effacer</button>
+  <p class="message" id="message-reinit" aria-live="polite"></p>
+</section>
+
+</main>
+
+<!-- ===================== MODE PROFESSEUR =====================
+     S’affiche quand l’adresse se termine par #prof (ou contient ?debug).
+     Les résultats envoyés pendant ce mode sont marqués [TEST PROF]. -->
+<aside id="panneau-prof" class="prof" hidden aria-label="Mode professeur">
+  <details open><summary><b>Mode professeur</b></summary>
+  <div class="prof-boutons">
+    <button type="button" data-prof="valider-1">Valider la partie 1</button>
+    <button type="button" data-prof="valider-2">Valider la partie 2</button>
+    <button type="button" data-prof="remplir">Répondre juste à la partie affichée</button>
+    <button type="button" data-prof="voir">Afficher / masquer les bonnes réponses</button>
+    <button type="button" data-prof="envoyer">Envoyer un résultat de test</button>
+    <button type="button" data-prof="quitter">Quitter le mode professeur</button>
+  </div>
+  </details>
+</aside>
+
+<!-- ======================== AIDE-MÉMOIRE ======================== -->
+<dialog id="aide-memoire" aria-labelledby="titre-aide">
+  <div class="dialog-corps">
+    <h2 id="titre-aide">Aide-mémoire</h2>
+    <h3>Ranger les électrons</h3>
+    <ul>
+      <li>Sous-couche <span class="s-txt">s</span> : 2 électrons au maximum. Sous-couche <span class="p-txt">p</span> : 6 électrons au maximum.</li>
+      <li>Ordre de remplissage à l’état fondamental : 1s → 2s → 2p → 3s → 3p (chaque sous-couche pleine avant la suivante).</li>
+      <li>La somme des exposants est égale à Z.</li>
+    </ul>
+    <h3>Placer l’élément dans le tableau</h3>
+    <ul>
+      <li>Ligne = numéro n de la dernière couche occupée.</li>
+      <li>Bloc = dernière sous-couche occupée (s ou p).</li>
+      <li>Colonne : bloc s → nombre d’électrons de la sous-couche s ; bloc p → 12 + nombre d’électrons de la sous-couche p.</li>
+      <li>L’hélium (1s<sup>2</sup>) est placé en colonne 18.</li>
+      <li>Électrons de valence = électrons de la couche externe.</li>
+    </ul>
+    <div class="defile" id="registre-aide"></div>
+    <div class="legende-blocs"><span class="ls">bloc s</span><span class="lp">bloc p</span></div>
+    <button class="btn" type="button" id="fermer-aide">Fermer</button>
+  </div>
+</dialog>
+
+<script>
+"use strict";
+
+/* =====================================================================
+   1. RÉGLAGES DU PROFESSEUR
+   ---------------------------------------------------------------------
+   - urlWorker  : adresse du worker Cloudflare commun à tous les jeux.
+   - nomDuJeu   : nom du fichier dans le dépôt (resultats_<nomDuJeu>.txt).
+   - questionsParPartie et seuilReussite : taille des questionnaires et
+     pourcentage de bonnes réponses pour débloquer la suite.
+   ===================================================================== */
+const REGLAGES = {
+  urlWorker: "https://resultatpolenord.lud-tek.workers.dev/",
+  nomDuJeu: "hotel_des_electrons",
+  questionsParPartie: { 1: 6, 2: 6 },
+  seuilReussite: 0.8,            // au moins 80 % : 5 bonnes réponses sur 6
+  cleSauvegarde: "hotel-des-electrons-v1"
+};
+const NB_PARTIES = 2;
+const NOMS_PARTIES = ["P1 Configuration", "P2 Tableau périodique"];
+const nbQuestions = n => REGLAGES.questionsParPartie[n];
+
+
+/* =====================================================================
+   2. OUTILS
+   ===================================================================== */
+const hasard = n => Math.floor(Math.random() * n);
+const auHasard = liste => liste[hasard(liste.length)];
+function melanger(liste) {
+  const copie = [...liste];
+  for (let i = copie.length - 1; i > 0; i--) {
+    const j = hasard(i + 1);
+    [copie[i], copie[j]] = [copie[j], copie[i]];
+  }
+  return copie;
+}
+const sansDoublons = liste => [...new Set(liste)];
+const pluriel = (n, mot) => n + " " + mot + (n > 1 ? "s" : "");
+const entre = (a, b) => Array.from({ length: b - a + 1 }, (_, k) => a + k);   // entre(1, 3) → [1, 2, 3]
+
+/* Fabrique une question à choix multiple (textes en HTML).
+   bonne : la bonne réponse ; mauvaises : on en garde 3 au maximum */
+function qcm({ enonce, bonne, mauvaises, explication, indice, ordreFixe = false }) {
+  const fausses = sansDoublons(mauvaises).filter(m => m !== bonne).slice(0, 3);
+  const options = ordreFixe ? [bonne, ...fausses] : melanger([bonne, ...fausses]);
+  return { type: "qcm", enonce, options, bonne, explication, indice };
+}
+
+
+/* =====================================================================
+   3. DONNÉES : LES 18 PREMIERS ÉLÉMENTS ET LES SOUS-COUCHES
+   ===================================================================== */
+const ELEMENTS = [
+  null,   // case 0 vide : ELEMENTS[Z] donne l’élément de numéro atomique Z
+  { s: "H",  nom: "hydrogène" }, { s: "He", nom: "hélium" },
+  { s: "Li", nom: "lithium" },   { s: "Be", nom: "béryllium" }, { s: "B",  nom: "bore" },
+  { s: "C",  nom: "carbone" },   { s: "N",  nom: "azote" },     { s: "O",  nom: "oxygène" },
+  { s: "F",  nom: "fluor" },     { s: "Ne", nom: "néon" },
+  { s: "Na", nom: "sodium" },    { s: "Mg", nom: "magnésium" }, { s: "Al", nom: "aluminium" },
+  { s: "Si", nom: "silicium" },  { s: "P",  nom: "phosphore" }, { s: "S",  nom: "soufre" },
+  { s: "Cl", nom: "chlore" },    { s: "Ar", nom: "argon" }
+];
+
+/* Les sous-couches, dans l’ordre de remplissage */
+const SOUS_COUCHES = [
+  { nom: "1s", n: 1, type: "s", max: 2 },
+  { nom: "2s", n: 2, type: "s", max: 2 },
+  { nom: "2p", n: 2, type: "p", max: 6 },
+  { nom: "3s", n: 3, type: "s", max: 2 },
+  { nom: "3p", n: 3, type: "p", max: 6 }
+];
+
+/* Configuration à l’état fondamental : tableau de 5 nombres d’électrons
+   (1s, 2s, 2p, 3s, 3p). configuration(11) → [2, 2, 6, 1, 0] */
+function configuration(Z) {
+  let reste = Z;
+  return SOUS_COUCHES.map(sc => {
+    const e = Math.min(sc.max, reste);
+    reste -= e;
+    return e;
+  });
+}
+const total = conf => conf.reduce((t, e) => t + e, 0);
+const memeConfig = (a, b) => a.every((e, k) => e === b[k]);
+const derniereOccupee = conf => conf.reduce((der, e, k) => (e > 0 ? k : der), -1);
+
+/* Écriture HTML d’une configuration : [2,2,6,1,0] → 1s² 2s² 2p⁶ 3s¹ */
+function cfg(conf) {
+  const morceaux = conf.map((e, k) => (e > 0 ? `${SOUS_COUCHES[k].nom}<sup>${e}</sup>` : "")).filter(Boolean);
+  return `<span class="cfg">${morceaux.join(" ")}</span>`;
+}
+const cfgZ = Z => cfg(configuration(Z));
+
+/* Position dans le tableau périodique, électrons de valence */
+function position(Z) {
+  const conf = configuration(Z), k = derniereOccupee(conf), sc = SOUS_COUCHES[k];
+  const ligne = sc.n, bloc = sc.type;
+  let colonne = bloc === "s" ? conf[k] : 12 + conf[k];
+  if (Z === 2) colonne = 18;                         // l’hélium est rangé avec les gaz nobles
+  const valence = conf.reduce((t, e, j) => (SOUS_COUCHES[j].n === ligne ? t + e : t), 0);
+  return { ligne, colonne, bloc, valence, derniere: k };
+}
+const ZparPosition = (ligne, colonne) => entre(1, 18).find(Z => {
+  const p = position(Z); return p.ligne === ligne && p.colonne === colonne;
+});
+const nomEl = Z => `${ELEMENTS[Z].nom} (${ELEMENTS[Z].s})`;
+const voyelleZ = Z => /^[aeiouyhé]/i.test(ELEMENTS[Z].nom);            // h muet : l’hydrogène, l’hélium
+const leNom = Z => (voyelleZ(Z) ? "l’" : "le ") + ELEMENTS[Z].nom;      // le sodium, l’azote
+const deNom = Z => (voyelleZ(Z) ? "d’" : "de ") + ELEMENTS[Z].nom;      // de sodium, d’azote
+const deEl = Z => (voyelleZ(Z) ? "d’" : "de ") + nomEl(Z);              // de sodium (Na), d’azote (N)
+/* Éléments proches dans le tableau (distance en lignes + rangs de colonnes) */
+const RANG_COLONNE = { 1: 0, 2: 1, 13: 2, 14: 3, 15: 4, 16: 5, 17: 6, 18: 7 };
+function proches(Z, distanceMax, filtre = () => true) {
+  const p = position(Z);
+  return entre(1, 18).filter(x => {
+    if (x === Z || !filtre(x)) return false;
+    const q = position(x);
+    return Math.abs(q.ligne - p.ligne) + Math.abs(RANG_COLONNE[q.colonne] - RANG_COLONNE[p.colonne]) <= distanceMax;
+  });
+}
+const ligneTxt = l => (l === 1 ? "1re" : l + "e") + " ligne";
+
+/* Explication de la méthode de remplissage pour un atome donné */
+function detailRemplissage(Z) {
+  const conf = configuration(Z);
+  let reste = Z;
+  const etapes = conf.map((e, k) => {
+    if (!e) return "";
+    reste -= e;
+    return `${SOUS_COUCHES[k].nom} : ${e} (reste ${reste})`;
+  }).filter(Boolean);
+  return `${Z} électrons à placer : ${etapes.join(" ; ")}. Configuration : ${cfg(conf)}.`;
+}
+
+/* Pourquoi une configuration n’est pas celle d’un atome à l’état fondamental */
+function raisonErreur(conf) {
+  const trop = conf.findIndex((e, k) => e > SOUS_COUCHES[k].max);
+  if (trop >= 0) return `la sous-couche ${SOUS_COUCHES[trop].nom} contient ${conf[trop]} électrons, alors qu’une sous-couche ${SOUS_COUCHES[trop].type} en contient au plus ${SOUS_COUCHES[trop].max}.`;
+  const k = conf.findIndex((e, j) => e < SOUS_COUCHES[j].max && conf.slice(j + 1).some(x => x > 0));
+  if (k >= 0) return `la sous-couche ${SOUS_COUCHES[k].nom} n’est pas pleine alors qu’une sous-couche suivante contient déjà des électrons.`;
+  return "elle ne respecte pas l’ordre de remplissage.";
+}
+
+/* Configurations fausses mais plausibles pour un atome (mêmes Z électrons) */
+function configsFausses(Z) {
+  const bonne = configuration(Z), L = derniereOccupee(bonne), resultat = [];
+  const ajouter = v => { if (!memeConfig(v, bonne) && v.every(e => e >= 0)) resultat.push(v); };
+  // a) un électron de la dernière sous-couche part trop tôt dans la suivante
+  if (L < 4) { const v = [...bonne]; v[L]--; v[L + 1]++; ajouter(v); }
+  // b) la sous-couche précédente n’est pas pleine
+  if (L >= 1 && bonne[L] < SOUS_COUCHES[L].max) {
+    let prec = L - 1; while (prec >= 0 && bonne[prec] === 0) prec--;
+    if (prec >= 0) { const v = [...bonne]; v[prec]--; v[L]++; ajouter(v); }
+  }
+  // c) tout entassé dans la sous-couche précédente (trop d’électrons)
+  if (L >= 1) { const v = [...bonne]; v[L - 1] += v[L]; v[L] = 0; ajouter(v); }
+  // e) un électron de la dernière sous-couche ajouté à une sous-couche déjà pleine
+  if (L >= 2) { const v = [...bonne]; v[L]--; v[L - 2]++; ajouter(v); }
+  // d) la sous-couche 2s est sautée
+  if (Z >= 4) {
+    let reste = Z - 2; const v = [2, 0, 0, 0, 0];
+    [2, 3, 4].forEach(k => { v[k] = Math.min(SOUS_COUCHES[k].max, reste); reste -= v[k]; });
+    if (reste === 0) ajouter(v);
+  }
+  const uniques = [];
+  resultat.forEach(v => { if (!uniques.some(u => memeConfig(u, v))) uniques.push(v); });
+  return melanger(uniques);
+}
+
+
+/* =====================================================================
+   4. BANQUES DE QUESTIONS
+   ---------------------------------------------------------------------
+   Types de questions :
+   - "qcm"     : choix multiple ;
+   - "trous"   : configuration à compléter avec des menus déroulants ;
+   - "hotel"   : l’élève place lui-même les électrons dans l’hôtel ;
+   - "tableau" : l’élève clique sur la case du tableau périodique.
+   ===================================================================== */
+
+/* ---------- Partie 1 : ranger les électrons ---------- */
+const INDICE_REMPLISSAGE = "Remplis dans l’ordre 1s → 2s → 2p → 3s → 3p. Une sous-couche s contient au plus 2 électrons, une sous-couche p au plus 6. Il faut placer Z électrons en tout.";
+
+function questionConstruire(Z) {
+  return {
+    type: "hotel", Z,
+    enonce: `Place les électrons de l’atome ${deEl(Z)}, de numéro atomique Z = ${Z}, dans l’hôtel (état fondamental), puis valide.`,
+    attendu: configuration(Z),
+    bonne: cfgZ(Z),
+    explication: detailRemplissage(Z),
+    indice: INDICE_REMPLISSAGE
+  };
+}
+
+const TYPES_P1 = {
+
+  configurationDeZ() {
+    const Z = auHasard(entre(3, 18));
+    return qcm({
+      enonce: `Quelle est la configuration électronique de l’atome ${deEl(Z)}, de numéro atomique Z = ${Z}, à l’état fondamental ?`,
+      bonne: cfgZ(Z),
+      mauvaises: [...configsFausses(Z).map(cfg), cfgZ(Z - 1), cfgZ(Math.min(18, Z + 1))],
+      explication: detailRemplissage(Z),
+      indice: INDICE_REMPLISSAGE
+    });
+  },
+
+  numeroAtomique() {
+    const Z = auHasard(entre(3, 18));
+    const voisins = melanger([Z - 3, Z - 2, Z - 1, Z + 1, Z + 2].filter(x => x >= 1 && x <= 18)).slice(0, 3);
+    const etiquette = x => `Z = ${x} : ${nomEl(x)}`;
+    return qcm({
+      enonce: `Un atome a pour configuration électronique ${cfgZ(Z)}. Quel est son numéro atomique, et de quel élément s’agit-il ?`,
+      bonne: etiquette(Z), mauvaises: voisins.map(etiquette),
+      explication: `Les exposants comptent les électrons : ${configuration(Z).filter(Boolean).join(" + ")} = ${Z}. L’atome est neutre, il a donc ${Z} protons : Z = ${Z}, c’est ${leNom(Z)}.`,
+      indice: "Additionne tous les exposants : c’est le nombre d’électrons, égal au nombre de protons Z."
+    });
+  },
+
+  pasFondamentale() {
+    const Z = auHasard(entre(4, 18));
+    const fausse = configsFausses(Z)[0];
+    const autres = melanger(entre(3, 18).filter(x => x !== Z)).slice(0, 3);
+    return qcm({
+      enonce: "Laquelle de ces configurations n’est <u>pas</u> celle d’un atome à l’état fondamental ?",
+      bonne: cfg(fausse), mauvaises: autres.map(cfgZ),
+      explication: `${cfg(fausse)} est impossible à l’état fondamental : ${raisonErreur(fausse)} Les trois autres sont correctes (${autres.map(x => ELEMENTS[x].s).join(", ")}).`,
+      indice: "Vérifie pour chaque proposition : s ≤ 2 électrons, p ≤ 6 électrons, et aucune sous-couche sautée ou incomplète avant la dernière."
+    });
+  },
+
+  completer() {
+    const Z = auHasard(entre(5, 18)), conf = configuration(Z), L = derniereOccupee(conf);
+    const nbTrous = 1 + hasard(2);                                // 1 ou 2 cases à compléter
+    const trous = [L, L - 1].slice(0, nbTrous);
+    const modele = [];
+    conf.forEach((e, k) => {
+      if (!e) return;
+      if (modele.length) modele.push(" ");
+      if (trous.includes(k)) {
+        const choix = sansDoublons([e, ...melanger(entre(1, 8).filter(x => x !== e)).slice(0, 3)]);
+        modele.push(SOUS_COUCHES[k].nom, { bonne: String(e), options: melanger(choix).map(String) });
+      } else {
+        modele.push(`${SOUS_COUCHES[k].nom}<sup>${e}</sup>`);
+      }
+    });
+    return {
+      type: "trous",
+      enonce: `Complète la configuration électronique de l’atome ${deEl(Z)} (Z = ${Z}) à l’état fondamental :`,
+      modele, bonne: cfgZ(Z),
+      explication: detailRemplissage(Z),
+      indice: `Il faut ${Z} électrons en tout : calcule combien il en reste après les sous-couches déjà écrites, sans dépasser 2 pour s et 6 pour p.`
+    };
+  },
+
+  coucheExterne() {
+    const Z = auHasard(entre(1, 18)), n = position(Z).ligne;
+    return qcm({
+      enonce: `Quelle est la couche externe (dernière couche occupée) de l’atome ${deEl(Z)}, de numéro atomique Z = ${Z} ?`,
+      bonne: `la couche n = ${n}`, mauvaises: [1, 2, 3].filter(x => x !== n).map(x => `la couche n = ${x}`),
+      explication: `Configuration : ${cfgZ(Z)}. La dernière couche occupée est celle du plus grand chiffre devant la lettre : n = ${n}.`,
+      indice: "Écris d’abord la configuration, puis regarde le plus grand chiffre placé devant s ou p."
+    });
+  },
+
+  notion() {
+    return auHasard([
+      () => qcm({ enonce: "Combien d’électrons une sous-couche s peut-elle contenir au maximum ?",
+        bonne: "2", mauvaises: ["1", "6", "8"], explication: "Une sous-couche s contient au plus 2 électrons.",
+        indice: "Regarde le nombre de places dans une chambre s de l’hôtel." }),
+      () => qcm({ enonce: "Combien d’électrons une sous-couche p peut-elle contenir au maximum ?",
+        bonne: "6", mauvaises: ["2", "3", "8"], explication: "Une sous-couche p contient au plus 6 électrons.",
+        indice: "Regarde le nombre de places dans une chambre p de l’hôtel." }),
+      () => qcm({ enonce: "Combien d’électrons la couche n = 2 peut-elle contenir au maximum ?",
+        bonne: "8", mauvaises: ["2", "6", "18"], explication: "La couche n = 2 comprend 2s (2 électrons) et 2p (6 électrons) : 2 + 6 = 8.",
+        indice: "La couche n = 2 a deux sous-couches : 2s et 2p." }),
+      () => qcm({ enonce: "Quelle sous-couche se remplit juste après la sous-couche 2p ?",
+        bonne: "3s", mauvaises: ["3p", "2s", "1s"], explication: "Ordre de remplissage : 1s → 2s → 2p → 3s → 3p.",
+        indice: "Récite l’ordre de remplissage depuis 1s." }),
+      () => qcm({ enonce: "Dans la configuration 1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>4</sup>, que représente l’exposant 4 ?",
+        bonne: "le nombre d’électrons dans la sous-couche 2p",
+        mauvaises: ["le numéro de la couche", "le nombre de protons de l’atome", "le nombre de sous-couches occupées"],
+        explication: "L’exposant donne le nombre d’électrons de la sous-couche : ici 4 électrons dans 2p.",
+        indice: "Le chiffre devant la lettre et l’exposant n’ont pas le même rôle." }),
+      () => qcm({ enonce: "Dans le nom de la sous-couche « 3p », que représente le chiffre 3 ?",
+        bonne: "le numéro n de la couche", mauvaises: ["le nombre d’électrons de la sous-couche", "le nombre maximal d’électrons", "le numéro atomique"],
+        explication: "3p est la sous-couche p de la couche n = 3.",
+        indice: "Dans l’hôtel, le chiffre du nom de la chambre est celui de l’étage." }),
+      () => qcm({ enonce: "Que signifie « à l’état fondamental » pour la configuration électronique d’un atome ?",
+        bonne: "C’est l’état le plus stable : les sous-couches sont remplies dans l’ordre, chacune pleine avant la suivante",
+        mauvaises: ["Les électrons sont répartis au hasard", "Toutes les sous-couches contiennent le même nombre d’électrons", "L’atome a perdu ses électrons externes"],
+        explication: "À l’état fondamental (le plus stable), les électrons occupent les sous-couches dans l’ordre 1s, 2s, 2p, 3s, 3p.",
+        indice: "Relis la partie 2 du cours." })
+    ])();
+  }
+};
+
+/* ---------- Partie 2 : le tableau périodique ---------- */
+const INDICE_POSITION = "Ligne = plus grand numéro de couche. Bloc = dernière sous-couche (s ou p). Colonne : bloc s → nombre d’électrons de la sous-couche s ; bloc p → 12 + nombre d’électrons de la sous-couche p.";
+
+function explicationPosition(Z) {
+  const conf = configuration(Z), p = position(Z), sc = SOUS_COUCHES[p.derniere];
+  if (Z === 2) return `Configuration ${cfgZ(2)} : une seule couche (1re ligne), sous-couche 1s pleine. L’hélium est l’exception : il est rangé en colonne 18 avec les gaz nobles, car sa couche externe est complète.`;
+  const col = p.bloc === "s" ? `bloc s avec ${conf[p.derniere]} électron(s) dans ${sc.nom} : colonne ${p.colonne}`
+                             : `bloc p avec ${conf[p.derniere]} électron(s) dans ${sc.nom} : colonne 12 + ${conf[p.derniere]} = ${p.colonne}`;
+  return `Configuration ${cfgZ(Z)}. Dernière couche n = ${p.ligne} : ${ligneTxt(p.ligne)}. Dernière sous-couche ${sc.nom} : ${col}. C’est ${leNom(Z)} (Z = ${Z}).`;
+}
+
+function questionPlacer(Z) {
+  const p = position(Z);
+  return {
+    type: "tableau", Z, ligne: p.ligne, colonne: p.colonne,
+    enonce: `Un atome a pour configuration électronique ${cfgZ(Z)}. Clique sur la case où se trouve cet élément dans le tableau périodique, puis valide.`,
+    bonne: `${ligneTxt(p.ligne)}, colonne ${p.colonne}`,
+    explication: explicationPosition(Z),
+    indice: INDICE_POSITION
+  };
+}
+
+const TYPES_P2 = {
+
+  ligne() {
+    const Z = auHasard(entre(1, 18)), l = position(Z).ligne;
+    return qcm({
+      enonce: `Dans quelle ligne du tableau périodique se trouve l’élément dont l’atome a pour configuration ${cfgZ(Z)} ?`,
+      bonne: ligneTxt(l), mauvaises: [1, 2, 3].filter(x => x !== l).map(ligneTxt), ordreFixe: false,
+      explication: `La dernière couche occupée est n = ${l} : l’élément est dans la ${ligneTxt(l)}.`,
+      indice: "La ligne est donnée par le plus grand chiffre placé devant s ou p."
+    });
+  },
+
+  colonne() {
+    const Z = auHasard(entre(3, 18)), conf = configuration(Z), p = position(Z), eDer = conf[p.derniere];
+    const valides = [1, 2, 13, 14, 15, 16, 17, 18];
+    const pieges = p.bloc === "p"
+      ? [p.valence, eDer, p.colonne - 1, p.colonne + 1]
+      : [p.colonne === 1 ? 2 : 1, 12 + eDer, 18, 10 + eDer];
+    const mauvaises = sansDoublons(pieges.filter(c => c !== p.colonne && c >= 1 && (valides.includes(c) || c <= 8)));
+    return qcm({
+      enonce: `Dans quelle colonne du tableau périodique se trouve l’élément dont l’atome a pour configuration ${cfgZ(Z)} ?`,
+      bonne: `colonne ${p.colonne}`, mauvaises: mauvaises.map(c => `colonne ${c}`),
+      explication: explicationPosition(Z),
+      indice: "Regarde la dernière sous-couche : si c’est s, la colonne est son nombre d’électrons ; si c’est p, ajoute 12 au nombre d’électrons de p."
+    });
+  },
+
+  bloc() {
+    const Z = auHasard(entre(1, 18).filter(x => x !== 2)), p = position(Z), sc = SOUS_COUCHES[p.derniere];
+    return qcm({
+      enonce: `À quel bloc du tableau périodique appartient l’élément dont l’atome a pour configuration ${cfgZ(Z)} ?`,
+      bonne: `au bloc ${p.bloc}`, mauvaises: [`au bloc ${p.bloc === "s" ? "p" : "s"}`], ordreFixe: true,
+      explication: `La dernière sous-couche occupée est ${sc.nom} : l’élément est dans le bloc ${p.bloc}.`,
+      indice: "Le bloc est donné par la lettre de la dernière sous-couche occupée."
+    });
+  },
+
+  inverse() {
+    const Z = auHasard(entre(3, 18)), p = position(Z);
+    const voisins = melanger(proches(Z, 2)).slice(0, 3);
+    return qcm({
+      enonce: `Un élément se trouve dans la ${ligneTxt(p.ligne)}, colonne ${p.colonne} du tableau périodique. Quelle est la configuration électronique de son atome ?`,
+      bonne: cfgZ(Z), mauvaises: melanger(voisins).map(cfgZ),
+      explication: `${ligneTxt(p.ligne)} : dernière couche n = ${p.ligne}. Colonne ${p.colonne} : ${p.bloc === "s"
+        ? `bloc s, ${p.colonne} électron(s) dans ${p.ligne}s`
+        : `bloc p, ${p.colonne} − 12 = ${p.colonne - 12} électron(s) dans ${p.ligne}p`}. D’où ${cfgZ(Z)} : c’est ${leNom(Z)}.`,
+      indice: "La ligne donne la dernière couche. Pour le bloc p, le nombre d’électrons de la sous-couche p est colonne − 12."
+    });
+  },
+
+  valenceConfiguration() {
+    const Z = auHasard(entre(3, 18)), conf = configuration(Z), p = position(Z);
+    const pieges = [conf[p.derniere], Z, p.colonne, p.valence + 1, p.valence - 1, 8].filter(x => x > 0 && x !== p.valence);
+    return qcm({
+      enonce: `Combien d’électrons de valence possède l’atome de configuration ${cfgZ(Z)} ?`,
+      bonne: String(p.valence), mauvaises: sansDoublons(pieges).map(String),
+      explication: `Les électrons de valence sont ceux de la couche externe n = ${p.ligne} : ${conf.map((e, k) => (SOUS_COUCHES[k].n === p.ligne && e ? `${e} dans ${SOUS_COUCHES[k].nom}` : "")).filter(Boolean).join(" et ")}, soit ${p.valence}.`,
+      indice: "Additionne les électrons de toutes les sous-couches de la dernière couche (s et p), pas seulement de la dernière sous-couche."
+    });
+  },
+
+  valencePosition() {
+    const colonne = auHasard([1, 2, 13, 14, 15, 16, 17, 18]), l = auHasard([2, 3]);
+    const valence = colonne <= 2 ? colonne : colonne - 10;
+    const pieges = [colonne, colonne - 12, valence + 1, 8, 2, 3].filter(x => x > 0 && x !== valence);
+    return qcm({
+      enonce: `Un élément de la ${ligneTxt(l)} se trouve dans la colonne ${colonne}. Combien d’électrons de valence possède son atome ?`,
+      bonne: String(valence), mauvaises: sansDoublons(pieges).map(String),
+      explication: colonne <= 2
+        ? `Colonne ${colonne} : bloc s, la couche externe contient ${colonne} électron(s) dans la sous-couche s.`
+        : `Colonne ${colonne} : bloc p, avec ${colonne - 12} électron(s) dans la sous-couche p et 2 dans la sous-couche s de la même couche, soit ${valence} électrons de valence.`,
+      indice: "Dans le bloc p, la couche externe contient 2 électrons s et (colonne − 12) électrons p."
+    });
+  },
+
+  memeColonne() {
+    const Z = auHasard(entre(3, 18)), p = position(Z);
+    const partenaire = ZparPosition(p.ligne === 2 ? 3 : 2, p.colonne);
+    const voisins = melanger(proches(partenaire, 2, x => position(x).colonne !== p.colonne)).slice(0, 3);
+    return qcm({
+      enonce: `L’atome A a pour configuration ${cfgZ(Z)}. Lequel de ces atomes appartient à un élément de la même colonne (même famille) que A ?`,
+      bonne: cfgZ(partenaire), mauvaises: melanger(voisins).map(cfgZ),
+      explication: `${ELEMENTS[Z].s} et ${ELEMENTS[partenaire].s} sont dans la colonne ${p.colonne} : leurs couches externes ont le même remplissage (${p.valence} électron(s) de valence). Ils font partie de la même famille chimique et ont des propriétés chimiques voisines.`,
+      indice: "Compare la fin des configurations : même nombre d’électrons sur la couche externe, mais pas sur la même couche."
+    });
+  },
+
+  notion() {
+    return auHasard([
+      () => qcm({ enonce: "Le numéro de la ligne d’un élément dans le tableau périodique est égal…",
+        bonne: "au numéro n de la dernière couche occupée par ses électrons",
+        mauvaises: ["au nombre d’électrons de valence", "au numéro atomique Z", "au nombre d’électrons de la dernière sous-couche"],
+        explication: "La ligne (période) correspond à la couche externe : n = 3 → 3e ligne.", indice: "Relis l’observation 1." }),
+      () => qcm({ enonce: "Les éléments d’une même colonne du tableau périodique (sauf l’hélium) ont…",
+        bonne: "le même nombre d’électrons de valence : ils forment une famille chimique",
+        mauvaises: ["le même nombre d’électrons au total", "le même numéro atomique", "le même nombre de couches occupées"],
+        explication: "Même colonne → même nombre d’électrons de valence → propriétés chimiques voisines : c’est une famille chimique.",
+        indice: "Compare les configurations de F et de Cl." }),
+      () => qcm({ enonce: "Pourquoi l’hélium (1s<sup>2</sup>) est-il placé dans la colonne 18 ?",
+        bonne: "Sa couche externe est complète, comme celle des autres gaz nobles : il a les mêmes propriétés chimiques qu’eux",
+        mauvaises: ["Parce qu’il a 18 électrons", "Parce qu’il est dans le bloc p", "Parce que la colonne 2 est déjà occupée"],
+        explication: "La couche n = 1 ne contient que 1s : avec 2 électrons, elle est complète, comme la couche externe des gaz nobles.",
+        indice: "Que contient au maximum la couche n = 1 ?" }),
+      () => qcm({ enonce: "Combien d’éléments compte la 2e ligne du tableau périodique ?",
+        bonne: "8", mauvaises: ["2", "6", "18"],
+        explication: "Dans la 2e ligne, les électrons remplissent 2s (2) puis 2p (6) : 2 + 6 = 8 éléments, du lithium au néon.",
+        indice: "Combien d’électrons la couche n = 2 peut-elle accueillir ?" }),
+      () => qcm({ enonce: "Dans le bloc p, comment trouve-t-on le numéro de la colonne d’un élément ?",
+        bonne: "12 + le nombre d’électrons de la sous-couche p",
+        mauvaises: ["le nombre d’électrons de la sous-couche p", "le nombre total d’électrons", "18 − le nombre d’électrons de la sous-couche p"],
+        explication: "Le bloc p occupe les colonnes 13 à 18 : p<sup>1</sup> → 13, …, p<sup>6</sup> → 18.",
+        indice: "La sous-couche p la moins remplie (p<sup>1</sup>) correspond à la colonne 13." })
+    ])();
+  }
+};
+
+/* Tire les questions d’une tentative */
+function tirerQuestions(n) {
+  const total = nbQuestions(n);
+  if (n === 1) {
+    // 2 constructions dans l’hôtel (deux atomes différents) + d’autres types tirés au hasard
+    const [Z1, Z2] = melanger(entre(3, 18)).slice(0, 2);
+    const autres = melanger(Object.values(TYPES_P1)).slice(0, total - 2).map(f => f());
+    return melanger([questionConstruire(Z1), questionConstruire(Z2), ...autres]);
+  }
+  // Partie 2 : 2 placements dans le tableau (deux éléments différents) + d’autres types
+  const [Z1, Z2] = melanger(entre(1, 18)).slice(0, 2);
+  const autres = melanger(Object.values(TYPES_P2)).slice(0, total - 2).map(f => f());
+  return melanger([questionPlacer(Z1), questionPlacer(Z2), ...autres]);
+}
+
+/* ===================== FIN DES DONNÉES ===================== */
+/* ======================== INTERFACE ======================== */
+
+const $ = sel => document.querySelector(sel);
+const $$ = sel => [...document.querySelectorAll(sel)];
+
+
+/* =====================================================================
+   5. DESSINS : L’HÔTEL (ATOME) ET LE REGISTRE (TABLEAU PÉRIODIQUE)
+   ===================================================================== */
+
+/* L’hôtel d’un atome.
+   conf      : nombre d’électrons de chaque sous-couche
+   interactif: true pour afficher les boutons − et + (question « hotel »)
+   Z         : numéro atomique (affiché au rez-de-chaussée), facultatif
+   derniere  : true pour entourer la dernière sous-couche occupée
+   mini      : version réduite */
+function hotelHTML(conf, { interactif = false, Z = null, derniere = false, mini = false, enseigne = "" } = {}) {
+  const kDer = derniereOccupee(conf);
+  const chambre = k => {
+    const sc = SOUS_COUCHES[k];
+    const places = entre(1, sc.max).map(i => `<span class="place${i <= conf[k] ? " pleine" : ""}"></span>`).join("");
+    const commandes = interactif ? `
+      <div class="commandes">
+        <button type="button" data-k="${k}" data-d="-1" aria-label="Retirer un électron de la sous-couche ${sc.nom}">−</button>
+        <button type="button" data-k="${k}" data-d="1" aria-label="Ajouter un électron dans la sous-couche ${sc.nom}">+</button>
+      </div>` : "";
+    return `<div class="chambre ${sc.type}${derniere && k === kDer ? " derniere" : ""}" data-k="${k}">
+        <span class="rang" aria-hidden="true">${k + 1}</span>
+        <span class="porte">${sc.nom} <small>(${sc.max} max)</small></span>
+        <span class="places" role="img" aria-label="${sc.nom} : ${conf[k]} électron(s) sur ${sc.max}">${places}</span>${commandes}
+      </div>`;
+  };
+  const etage = n => `<div class="etage">
+      <div class="etage-nom"><b>${mini ? "" : "Couche "}n = ${n}</b><span>${n === 1 ? "1 chambre" : "2 chambres"}</span></div>
+      <div class="chambres">${SOUS_COUCHES.map((sc, k) => (sc.n === n ? chambre(k) : "")).join("")}</div>
+    </div>`;
+  return `<div class="hotel${mini ? " mini" : ""}">
+      ${enseigne ? `<div class="enseigne">${enseigne}</div>` : ""}
+      ${etage(3)}${etage(2)}${etage(1)}
+      <div class="hall">Rez-de-chaussée : le noyau${Z ? ` (${Z} protons, charge +${Z}e)` : ""}</div>
+    </div>`;
+}
+
+/* Met à jour les places d’un hôtel déjà affiché */
+function majHotel(conteneur, conf) {
+  conteneur.querySelectorAll(".chambre").forEach(ch => {
+    const k = Number(ch.dataset.k), sc = SOUS_COUCHES[k];
+    ch.querySelectorAll(".place").forEach((pl, i) => pl.classList.toggle("pleine", i < conf[k]));
+    ch.querySelector(".places").setAttribute("aria-label", `${sc.nom} : ${conf[k]} électron(s) sur ${sc.max}`);
+    const [moins, plus] = ch.querySelectorAll(".commandes button");
+    if (moins) { moins.disabled = conf[k] === 0; plus.disabled = conf[k] === sc.max; }
+  });
+}
+
+/* Le registre : tableau périodique des lignes 1 à 3.
+   mode "decouverte" : symboles et Z visibles, cases colorées par bloc
+   mode "aide"       : comme « decouverte », mais non cliquable (aide-mémoire)
+   mode "quiz"       : cases vides et neutres (révélées après la réponse) */
+const COLONNES = [1, 2, "…", 13, 14, 15, 16, 17, 18];
+function registreHTML(mode, prefixe) {
+  let html = `<div class="tp ${mode}" role="group" aria-label="Tableau périodique, lignes 1 à 3"><div></div>`;
+  html += COLONNES.map(c => `<div class="entete">${c === "…" ? "3–12" : "col.<br>" + c}</div>`).join("");
+  [1, 2, 3].forEach(l => {
+    html += `<div class="lig">Ligne<br>${l}</div>`;
+    COLONNES.forEach(c => {
+      if (c === "…") { html += `<div class="ellipse">${l > 1 ? "…" : ""}</div>`; return; }
+      const Z = ZparPosition(l, c);
+      if (!Z) { html += "<div></div>"; return; }
+      const bloc = position(Z).bloc;
+      const contenu = `<span class="z">${Z}</span><b>${ELEMENTS[Z].s}</b>`;
+      const description = `${ELEMENTS[Z].nom}, Z = ${Z}, ligne ${l}, colonne ${c}`;
+      if (mode === "quiz") {
+        html += `<button type="button" class="case ${bloc}" id="${prefixe}-${l}-${c}" data-l="${l}" data-c="${c}" aria-pressed="false" aria-label="Ligne ${l}, colonne ${c}"><span class="contenu" hidden>${contenu}</span></button>`;
+      } else if (mode === "aide") {
+        html += `<div class="case ${bloc}" role="img" aria-label="${description}" style="cursor:default">${contenu}</div>`;
+      } else {
+        html += `<button type="button" class="case ${bloc}" data-z="${Z}" aria-label="${description}">${contenu}</button>`;
+      }
+    });
+  });
+  return html + "</div>";
+}
+
+/* Façade décorative du bandeau : les fenêtres allumées sont les électrons du sodium */
+function dessinerFacade() {
+  const conf = configuration(11);
+  let svg = `<rect x="20" y="40" width="200" height="185" rx="6" fill="#2a2850" stroke="#5a5690"/>
+    <rect x="70" y="10" width="100" height="26" rx="4" fill="#0b0a17" stroke="#e2b354"/>
+    <text x="120" y="28" text-anchor="middle" font-family="Unbounded, sans-serif" font-size="12" fill="#e2b354" letter-spacing="2">HÔTEL</text>`;
+  const y = { 3: 58, 2: 112, 1: 166 };
+  let rang = 0;
+  SOUS_COUCHES.forEach((sc, k) => {
+    const x0 = sc.type === "s" ? 34 : 86;
+    for (let i = 0; i < sc.max; i++) {
+      const x = x0 + (sc.type === "s" ? i * 22 : (i % 3) * 40), yy = y[sc.n] + (sc.type === "p" && i >= 3 ? 22 : 0);
+      const allumee = i < conf[k];
+      svg += `<rect class="fenetre${allumee ? " allumee" : ""}" style="animation-delay:${(rang++) * 0.12}s" x="${x}" y="${yy}" width="${sc.type === "s" ? 16 : 30}" height="16" rx="2"
+        fill="${allumee ? "#f2c14e" : "#3d3a6e"}"/>`;
+    }
+  });
+  svg += `<rect x="104" y="198" width="32" height="27" fill="#0b0a17"/>
+    <text x="120" y="217" text-anchor="middle" font-family="sans-serif" font-size="9" fill="#f1eefb">Na</text>`;
+  $("#facade").innerHTML = svg;
+}
+
+
+/* =====================================================================
+   6. DÉCOUVERTES (simulateur et registre interactif)
+   ===================================================================== */
+function afficherSimulateur(Z) {
+  $("#z-sim").value = Z;
+  $("#sim-z").textContent = `Z = ${Z}`;
+  $("#sim-sym").textContent = ELEMENTS[Z].s;
+  $("#sim-nom").textContent = ELEMENTS[Z].nom;
+  $("#sim-cfg").innerHTML = cfgZ(Z);
+  $("#sim-hotel").innerHTML = hotelHTML(configuration(Z), { Z, enseigne: `Atome ${deNom(Z)}` });
+}
+let animation = null;
+function arreterAnimation() {
+  if (animation) { clearInterval(animation); animation = null; $("#z-animer").textContent = "▶ Remplir l’hôtel de Z = 1 à 18"; }
+}
+function lancerAnimation() {
+  if (animation) { arreterAnimation(); return; }
+  let Z = 1; afficherSimulateur(Z);
+  $("#z-animer").textContent = "■ Arrêter";
+  animation = setInterval(() => {
+    Z++;
+    if (Z > 18) { arreterAnimation(); return; }
+    afficherSimulateur(Z);
+  }, 900);
+}
+
+function afficherDetailElement(Z) {
+  const conf = configuration(Z), p = position(Z), sc = SOUS_COUCHES[p.derniere];
+  const colonne = Z === 2
+    ? "Exception : l’hélium est rangé en <b>colonne 18</b> avec les gaz nobles (couche externe complète)."
+    : p.bloc === "s"
+      ? `${conf[p.derniere]} électron(s) dans ${sc.nom} → <b>colonne ${p.colonne}</b>`
+      : `${conf[p.derniere]} électron(s) dans ${sc.nom} → 12 + ${conf[p.derniere]} = <b>colonne ${p.colonne}</b>`;
+  $("#detail-element").innerHTML = `
+    <h3 style="margin-top:0">${ELEMENTS[Z].nom} (${ELEMENTS[Z].s}), Z = ${Z}</h3>
+    <p>Configuration : ${cfgZ(Z)}</p>
+    <ul class="deduction">
+      <li>Dernière couche occupée : n = ${p.ligne} → <b>${ligneTxt(p.ligne)}</b></li>
+      <li>Dernière sous-couche : ${sc.nom} → <b>bloc ${p.bloc}</b></li>
+      <li>${colonne}</li>
+      <li>Électrons de valence (couche n = ${p.ligne}) : <b>${p.valence}</b></li>
+    </ul>
+    ${hotelHTML(conf, { Z, derniere: true, mini: true })}`;
+  $$("#registre-decouverte .case").forEach(c => c.setAttribute("aria-pressed", String(Number(c.dataset.z) === Z)));
+}
+
+
+/* =====================================================================
+   7. ÉTAT DU JEU ET SAUVEGARDE (sur l’appareil de l’élève)
+   ===================================================================== */
+function etatVide() {
+  return {
+    identite: null,                 // { prenom, nom (initiale), classe }
+    tempsMs: 0,                     // temps total passé
+    parties: entre(1, NB_PARTIES).map(() => ({
+      reussie: false, tentatives: 0, meilleur: 0, bonnes: 0, repondues: 0, aides: 0,
+      premierScore: null,           // score de la 1re tentative
+      tempsMs: 0                    // temps passé sur cette partie
+    })),
+    envoye: false,
+    suivi: { sorties: 0, tempsDehorsMs: 0, copies: 0, temps: [], rapides: 0, apresSortie: 0 },
+    reglages: { taille: "0", police: "standard", contraste: "normal", mouvement: "normal", chrono: "visible" }
+  };
+}
+let etat = etatVide();
+try {
+  const lu = JSON.parse(localStorage.getItem(REGLAGES.cleSauvegarde) || "null");
+  if (lu && lu.parties && lu.parties.length === NB_PARTIES) etat = Object.assign(etatVide(), lu);
+} catch (e) { /* pas de sauvegarde possible : on continue sans */ }
+
+function sauvegarder() {
+  try { localStorage.setItem(REGLAGES.cleSauvegarde, JSON.stringify(etat)); } catch (e) {}
+}
+const termine = () => etat.parties[NB_PARTIES - 1].reussie;
+
+/* Questions en cours (non sauvegardées : une nouvelle série est tirée à chaque ouverture) */
+const enCours = { 1: null, 2: null };
+
+
+/* =====================================================================
+   8. CHRONOMÈTRE
+   ===================================================================== */
+let dernierTop = null;
+function formaterTemps(ms) {
+  const s = Math.round(ms / 1000), m = Math.floor(s / 60);
+  return String(m).padStart(2, "0") + ":" + String(s % 60).padStart(2, "0");
+}
+function texteTemps(ms) {
+  const s = Math.round(ms / 1000), m = Math.floor(s / 60);
+  return `${m} min ${String(s % 60).padStart(2, "0")} s`;
+}
+function chronoTourne() { return etat.identite && !termine(); }
+setInterval(() => {
+  const maintenant = Date.now();
+  if (chronoTourne() && dernierTop && document.visibilityState === "visible") {
+    etat.tempsMs += maintenant - dernierTop;
+    const n = partieAffichee();
+    if (n) etat.parties[n - 1].tempsMs = (etat.parties[n - 1].tempsMs || 0) + (maintenant - dernierTop);
+  }
+  dernierTop = maintenant;
+  $("#chrono").textContent = "⏱ " + formaterTemps(etat.tempsMs);
+}, 1000);
+setInterval(sauvegarder, 5000);
+
+
+/* =====================================================================
+   9. ENVOI DES RÉSULTATS AU WORKER
+   ===================================================================== */
+function construireEnvoi() {
+  // Format attendu par le worker « résultats » (worker_resultats.js) :
+  //   prenom, initiale, classe, jeu, score, scoreMax, pourcentage, premierEssai,
+  //   temps, indices, erreurs, niveaux[], activite{}, test
+  const id = etat.identite;
+  const bonnes = etat.parties.reduce((t, p) => t + p.bonnes, 0);
+  const repondues = etat.parties.reduce((t, p) => t + p.repondues, 0);
+  const aides = etat.parties.reduce((t, p) => t + p.aides, 0);
+  const faites = etat.parties.map((p, i) => ({ p, n: nbQuestions(i + 1) })).filter(x => x.p.premierScore !== null);
+  const premierBonnes = faites.reduce((t, x) => t + x.p.premierScore, 0);
+  const premierTotal = faites.reduce((t, x) => t + x.n, 0);
+  const suivi = etat.suivi;
+  return {
+    jeu: REGLAGES.nomDuJeu,
+    prenom: id.prenom,
+    initiale: id.nom.trim().charAt(0).toUpperCase(),
+    classe: id.classe,
+    score: bonnes,
+    scoreMax: repondues,
+    pourcentage: repondues ? Math.round(100 * bonnes / repondues) : 0,
+    premierEssai: premierTotal ? Math.round(100 * premierBonnes / premierTotal) : 0,
+    temps: texteTemps(etat.tempsMs),
+    indices: aides,
+    erreurs: repondues - bonnes,
+    niveaux: etat.parties.map((p, i) => ({
+      nom: `${NOMS_PARTIES[i]} ${p.reussie ? "réussie" : "non réussie"}, ${p.tentatives} essai(s)`,
+      pct: p.repondues ? Math.round(100 * p.bonnes / p.repondues) : 0,
+      temps: texteTemps(p.tempsMs || 0),
+      premierEssai: p.premierScore === null ? "–" : `${p.premierScore}/${nbQuestions(i + 1)}`
+    })),
+    activite: {
+      sorties: suivi.sorties,
+      tempsHors: texteTemps(suivi.tempsDehorsMs),
+      copies: suivi.copies,
+      tempsMedian: String(mediane(suivi.temps)).replace(".", ","),
+      rapides: suivi.rapides,
+      apresSortie: suivi.apresSortie,
+      reponses: suivi.temps.length
+    },
+    test: profUtilise
+  };
+}
+
+/* Texte de secours (si l’envoi échoue), lisible par le professeur */
+function texteDeSecours(d) {
+  return `${d.test ? "[TEST PROF] " : ""}${new Date().toLocaleString("fr-FR")} | ${d.classe} | ${d.prenom} ${d.initiale}. | ` +
+         `Score ${d.score}/${d.scoreMax} | Réussite ${d.pourcentage} % | 1er essai ${d.premierEssai} % | Temps ${d.temps} | ` +
+         `Indices ${d.indices} | Erreurs ${d.erreurs} | ` +
+         d.niveaux.map(n => `${n.nom} ${n.pct} % (${n.temps}, 1er essai ${n.premierEssai})`).join(" ; ") +
+         ` | Activité ${resumeCourt()}`;
+}
+
+async function envoyerResultats() {
+  const message = $("#message-envoi");
+  if (!etat.identite && modeProf()) etat.identite = { prenom: "Test", nom: "P", classe: "PROF" };
+  if (!etat.identite) { message.textContent = "Remplis d’abord ton prénom, l’initiale de ton nom et ta classe dans l’accueil."; return; }
+  const donnees = construireEnvoi();
+  $("#texte-secours").value = texteDeSecours(donnees);
+  message.className = "message";
+  message.textContent = "Envoi en cours…";
+  $("#envoyer").disabled = true;
+  try {
+    const reponse = await fetch(REGLAGES.urlWorker, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(donnees)
+    });
+    if (!reponse.ok) throw new Error("réponse " + reponse.status);
+    etat.envoye = true; sauvegarder();
+    message.textContent = "✅ Résultats envoyés à ton professeur. Tu peux fermer la page.";
+    $("#secours").hidden = true;
+  } catch (erreur) {
+    // Deuxième essai en mode simple (au cas où le navigateur bloque la première requête)
+    try {
+      await fetch(REGLAGES.urlWorker, { method: "POST", mode: "no-cors", body: JSON.stringify(donnees) });
+      etat.envoye = true; sauvegarder();
+      message.textContent = "Résultats envoyés, sans confirmation du serveur. Par précaution, copie aussi le texte ci-dessous.";
+    } catch (e2) {
+      message.className = "message erreur";
+      message.textContent = "L’envoi n’a pas fonctionné (connexion ?). Réessaie, ou copie le texte ci-dessous pour ton professeur.";
+    }
+    $("#secours").hidden = false;
+  } finally {
+    $("#envoyer").disabled = false;
+  }
+}
+
+
+/* =====================================================================
+   10. AFFICHAGE DES QUESTIONNAIRES
+   ===================================================================== */
+const seuil = n => Math.ceil(nbQuestions(n) * REGLAGES.seuilReussite - 1e-9);
+
+function nouvelleTentative(n) {
+  enCours[n] = { questions: tirerQuestions(n), reponses: [], debut: Date.now(), derniereReponse: 0 };
+  afficherQuiz(n);
+}
+
+/* Nom du deuxième bouton d’aide, selon le type de question */
+const NOM_AIDE_2 = { qcm: "Retirer une réponse fausse", trous: "Retirer une réponse fausse",
+                     hotel: "Montrer l’ordre de remplissage", tableau: "Montrer la bonne ligne" };
+
+function afficherQuiz(n) {
+  const zone = $("#quiz-p" + n), serie = enCours[n], stats = etat.parties[n - 1];
+  zone.innerHTML = `
+    <div class="quiz-tete">
+      <h3>Questionnaire · tentative ${stats.tentatives + 1}</h3>
+      <span>${seuil(n)} bonnes réponses sur ${nbQuestions(n)} pour réussir</span>
+    </div>
+    ${serie.questions.map((q, i) => htmlQuestion(n, q, i)).join("")}
+    <div class="resultat" hidden aria-live="polite"></div>`;
+
+  observerQuestions(n);
+  serie.questions.forEach((q, i) => {
+    const bloc = $(`#q${n}-${i}`);
+    if (q.type === "qcm") {
+      bloc.querySelectorAll(".option").forEach(bouton =>
+        bouton.addEventListener("click", () => repondre(n, i, Number(bouton.dataset.k))));
+    } else if (q.type === "trous") {
+      bloc.querySelector(".valider").addEventListener("click", () => repondreTrous(n, i));
+    } else if (q.type === "hotel") {
+      q.saisie = [0, 0, 0, 0, 0];
+      bloc.querySelectorAll(".commandes button").forEach(b => b.addEventListener("click", () => {
+        const k = Number(b.dataset.k);
+        q.saisie[k] = Math.max(0, Math.min(SOUS_COUCHES[k].max, q.saisie[k] + Number(b.dataset.d)));
+        majSaisieHotel(bloc, q);
+      }));
+      majSaisieHotel(bloc, q);
+      bloc.querySelector(".valider").addEventListener("click", () => repondreHotel(n, i));
+    } else if (q.type === "tableau") {
+      q.choix = null;
+      bloc.querySelectorAll(".case").forEach(c => c.addEventListener("click", () => {
+        if (serie.reponses[i] !== undefined) return;
+        q.choix = { ligne: Number(c.dataset.l), colonne: Number(c.dataset.c) };
+        bloc.querySelectorAll(".case").forEach(x => x.setAttribute("aria-pressed", String(x === c)));
+        bloc.querySelector(".lecture output").textContent = `${ligneTxt(q.choix.ligne)}, colonne ${q.choix.colonne}`;
+      }));
+      bloc.querySelector(".valider").addEventListener("click", () => repondreTableau(n, i));
+    }
+    bloc.querySelector('[data-aide="indice"]').addEventListener("click", e => {
+      bloc.querySelector(".indice").hidden = false; e.target.disabled = true; compterAide(n);
+    });
+    bloc.querySelector('[data-aide="aide2"]').addEventListener("click", e => {
+      deuxiemeAide(bloc, q); e.target.disabled = true; compterAide(n);
+    });
+    bloc.querySelector('[data-aide="ecouter"]').addEventListener("click", () =>
+      lireAVoixHaute(bloc.querySelector(".enonce"), bloc.querySelector(".options, .trou") || document.createElement("span")));
+  });
+}
+
+/* HTML d’une question selon son type */
+function htmlQuestion(n, q, i) {
+  let corps;
+  if (q.type === "qcm") {
+    corps = `<div class="options" role="group" aria-label="Réponses possibles à la question ${i + 1}">
+        ${q.options.map((o, k) => `<button type="button" class="option" data-k="${k}">${o}</button>`).join("")}
+      </div>`;
+  } else if (q.type === "trous") {
+    corps = `<div class="trou">${q.modele.map((m, j) => typeof m === "string" ? m : `
+        <label class="cache-visuel" for="t${n}-${i}-${j}">Nombre d’électrons à compléter</label>
+        <select id="t${n}-${i}-${j}" data-j="${j}">
+          <option value="">…</option>
+          ${m.options.map(o => `<option value="${o}">${o}</option>`).join("")}
+        </select>`).join("")}</div>
+      <div class="zone-action"><button type="button" class="btn valider">Valider</button></div>`;
+  } else if (q.type === "hotel") {
+    corps = `<div class="zone-action">
+        ${hotelHTML([0, 0, 0, 0, 0], { interactif: true, Z: q.Z, enseigne: `Atome ${deNom(q.Z)}` })}
+        <p class="lecture">Électrons placés : <output>0</output> sur ${q.Z} · Ta configuration : <span class="saisie"></span></p>
+        <button type="button" class="btn valider">Valider</button>
+      </div>`;
+  } else {
+    corps = `<div class="zone-action">
+        <div class="defile" style="max-width:100%">${registreHTML("quiz", `c${n}-${i}`)}</div>
+        <p class="lecture">Case choisie : <output>aucune</output></p>
+        <button type="button" class="btn valider">Valider</button>
+      </div>`;
+  }
+  return `
+    <div class="question" id="q${n}-${i}">
+      <p class="enonce">${i + 1}. ${q.enonce}</p>
+      ${corps}
+      <div class="aides">
+        <button type="button" class="aide" data-aide="indice">Coup de pouce</button>
+        <button type="button" class="aide" data-aide="aide2">${NOM_AIDE_2[q.type]}</button>
+        <button type="button" class="aide" data-aide="ecouter">🔊 Écouter</button>
+      </div>
+      <div class="indice" hidden>${q.indice || ""}</div>
+      <div class="solution">Réponse attendue : ${q.bonne}</div>
+      <div class="retour" aria-live="polite"></div>
+    </div>`;
+}
+
+function majSaisieHotel(bloc, q) {
+  majHotel(bloc.querySelector(".hotel"), q.saisie);
+  bloc.querySelector(".lecture output").textContent = total(q.saisie);
+  bloc.querySelector(".saisie").innerHTML = total(q.saisie) ? cfg(q.saisie) : "(aucun électron placé)";
+}
+
+/* Deuxième aide : dépend du type de question */
+function deuxiemeAide(bloc, q) {
+  if (q.type === "hotel") { bloc.querySelector(".hotel").classList.add("montrer-ordre"); return; }
+  if (q.type === "tableau") {
+    bloc.querySelectorAll(`.case[data-l="${q.ligne}"]`).forEach(c => c.classList.add("piste"));
+    return;
+  }
+  if (q.type === "trous") {
+    bloc.querySelectorAll("select").forEach(menu => {
+      const bonne = q.modele[menu.dataset.j].bonne;
+      const fausses = [...menu.options].filter(o => o.value && o.value !== bonne);
+      if (fausses.length > 1) auHasard(fausses).remove();
+    });
+    return;
+  }
+  const fausses = [...bloc.querySelectorAll(".option")].filter(b => q.options[b.dataset.k] !== q.bonne && !b.disabled);
+  if (fausses.length > 1) {
+    const b = auHasard(fausses);
+    b.disabled = true; b.classList.add("retiree"); b.setAttribute("aria-label", "réponse retirée");
+  }
+}
+
+/* Réponse à un QCM */
+function repondre(n, i, k) {
+  const serie = enCours[n], q = serie.questions[i];
+  if (serie.reponses[i] !== undefined) return;            // réponse déjà verrouillée
+  const juste = q.options[k] === q.bonne;
+  const bloc = $(`#q${n}-${i}`);
+  bloc.querySelectorAll(".option").forEach(b => {
+    b.disabled = true;
+    if (q.options[b.dataset.k] === q.bonne) b.classList.add("juste");
+  });
+  if (!juste) bloc.querySelector(`.option[data-k="${k}"]`).classList.add("fausse");
+  enregistrerReponse(n, i, juste);
+}
+
+/* Réponse à une configuration à trous : juste seulement si toutes les cases sont justes */
+function repondreTrous(n, i) {
+  const serie = enCours[n], q = serie.questions[i];
+  if (serie.reponses[i] !== undefined) return;
+  const bloc = $(`#q${n}-${i}`), menus = [...bloc.querySelectorAll("select")];
+  const retour = bloc.querySelector(".retour");
+  if (menus.some(m => !m.value)) {
+    retour.className = "retour ko";
+    retour.textContent = "Choisis un nombre dans chaque case avant de valider.";
+    menus.find(m => !m.value).focus();
+    return;
+  }
+  let juste = true;
+  menus.forEach(m => {
+    const ok = m.value === q.modele[m.dataset.j].bonne;
+    if (!ok) juste = false;
+    m.disabled = true;
+    m.classList.add(ok ? "juste" : "fausse");
+  });
+  bloc.querySelector(".valider").disabled = true;
+  enregistrerReponse(n, i, juste);
+}
+
+/* Réponse à une construction dans l’hôtel */
+function repondreHotel(n, i) {
+  const serie = enCours[n], q = serie.questions[i];
+  if (serie.reponses[i] !== undefined) return;
+  const bloc = $(`#q${n}-${i}`), retour = bloc.querySelector(".retour");
+  if (total(q.saisie) === 0) {
+    retour.className = "retour ko";
+    retour.textContent = "Place au moins un électron avant de valider.";
+    return;
+  }
+  const juste = memeConfig(q.saisie, q.attendu);
+  bloc.querySelectorAll(".commandes button").forEach(b => (b.disabled = true));
+  bloc.querySelectorAll(".chambre").forEach(ch => {
+    const k = Number(ch.dataset.k);
+    if (q.saisie[k] !== q.attendu[k]) ch.classList.add("fausse");
+  });
+  bloc.querySelector(".valider").disabled = true;
+  enregistrerReponse(n, i, juste);
+}
+
+/* Réponse à un placement dans le tableau */
+function repondreTableau(n, i) {
+  const serie = enCours[n], q = serie.questions[i];
+  if (serie.reponses[i] !== undefined) return;
+  const bloc = $(`#q${n}-${i}`), retour = bloc.querySelector(".retour");
+  if (!q.choix) {
+    retour.className = "retour ko";
+    retour.textContent = "Clique d’abord sur une case du tableau.";
+    return;
+  }
+  const juste = q.choix.ligne === q.ligne && q.choix.colonne === q.colonne;
+  bloc.querySelectorAll(".case").forEach(c => {
+    c.disabled = true;
+    c.querySelector(".contenu").hidden = false;                // on révèle les éléments
+    const l = Number(c.dataset.l), col = Number(c.dataset.c);
+    if (l === q.ligne && col === q.colonne) c.classList.add("juste");
+    else if (l === q.choix.ligne && col === q.choix.colonne) c.classList.add("fausse");
+  });
+  bloc.querySelector(".tp").classList.add("revele");
+  bloc.querySelector(".valider").disabled = true;
+  enregistrerReponse(n, i, juste);
+}
+
+/* Partie commune : verrouillage, explication, statistiques */
+function enregistrerReponse(n, i, juste) {
+  const serie = enCours[n], q = serie.questions[i], bloc = $(`#q${n}-${i}`);
+  serie.reponses[i] = juste;
+  noterTempsDeReponse(serie, q);
+  bloc.querySelectorAll(".aide:not([data-aide='ecouter'])").forEach(b => (b.disabled = true));
+  const retour = bloc.querySelector(".retour");
+  retour.className = "retour " + (juste ? "ok" : "ko");
+  retour.innerHTML = `<b>${juste ? "Bonne réponse." : "Réponse fausse."}</b> <span>${q.explication}</span>`;
+
+  const stats = etat.parties[n - 1];
+  stats.repondues++; if (juste) stats.bonnes++;
+  sauvegarder();
+
+  if (serie.reponses.filter(r => r !== undefined).length === serie.questions.length) terminerTentative(n);
+}
+
+
+/* =====================================================================
+   SUIVI DE L’ACTIVITÉ (indices d’une aide extérieure, IA ou autre)
+   ---------------------------------------------------------------------
+   Ce ne sont pas des preuves : ce sont des indices à croiser avec ce que
+   le professeur connaît de l’élève. Les élèves en sont informés à l’accueil.
+   - sorties de la page de plus de 2 s (changement d’onglet ou d’application) ;
+   - réponses données après une sortie, alors que la question était déjà affichée ;
+   - copies de texte ;
+   - temps de réponse par question (médiane) et réponses en moins de 3 s.
+   Attention : certains outils d’aide (dictée, loupe, lecteur d’écran externe)
+   peuvent provoquer des sorties de page sans intention de tricher.
+   ===================================================================== */
+const SEUIL_RAPIDE_MS = 3000;     // réponse plus rapide que ce délai = « très rapide »
+const SORTIE_MINIMUM_MS = 2000;   // une sortie plus courte n’est pas comptée (menus, notifications)
+
+function suiviActif() { return Boolean(etat.identite) && !termine(); }
+
+/* Repère le moment où chaque question devient visible à l’écran */
+function observerQuestions(n) {
+  const serie = enCours[n];
+  if (!("IntersectionObserver" in window)) { serie.questions.forEach(q => (q.vueA = Date.now())); return; }
+  const observateur = new IntersectionObserver(entrees => entrees.forEach(e => {
+    if (!e.isIntersecting) return;
+    const q = serie.questions[Number(e.target.id.split("-")[1])];
+    if (q && !q.vueA) q.vueA = Date.now();
+    observateur.unobserve(e.target);
+  }), { threshold: 0.4 });
+  serie.questions.forEach((_, i) => observateur.observe($(`#q${n}-${i}`)));
+}
+
+function noterTempsDeReponse(serie, q) {
+  if (!suiviActif()) return;
+  const maintenant = Date.now();
+  const debut = Math.max(q.vueA || serie.debut, serie.derniereReponse || 0);
+  const duree = maintenant - debut;
+  serie.derniereReponse = maintenant;
+  etat.suivi.temps.push(Math.round(duree / 100) / 10);          // en secondes, au dixième
+  if (duree < SEUIL_RAPIDE_MS) etat.suivi.rapides++;
+  if (q.sortiePendant) etat.suivi.apresSortie++;
+}
+
+/* Sorties de la page : on note le départ, et on compte au retour si l’absence a duré plus de 2 s */
+let debutSortie = null;
+function quitteLaPage() { if (debutSortie === null) debutSortie = Date.now(); }
+function revientSurLaPage() {
+  if (debutSortie === null) return;
+  const duree = Date.now() - debutSortie;
+  debutSortie = null;
+  if (!suiviActif() || duree < SORTIE_MINIMUM_MS) return;
+  etat.suivi.sorties++;
+  etat.suivi.tempsDehorsMs += duree;
+  // les questions déjà affichées et pas encore répondues sont marquées
+  Object.values(enCours).forEach(serie => serie && serie.questions.forEach((q, i) => {
+    if (q.vueA && serie.reponses[i] === undefined) q.sortiePendant = true;
+  }));
+  sauvegarder();
+}
+document.addEventListener("visibilitychange", () =>
+  document.visibilityState === "hidden" ? quitteLaPage() : revientSurLaPage());
+window.addEventListener("blur", quitteLaPage);
+window.addEventListener("focus", revientSurLaPage);
+document.addEventListener("copy", () => { if (suiviActif()) { etat.suivi.copies++; sauvegarder(); } });
+
+function mediane(valeurs) {
+  if (!valeurs.length) return 0;
+  const tri = [...valeurs].sort((a, b) => a - b), m = Math.floor(tri.length / 2);
+  return tri.length % 2 ? tri[m] : Math.round((tri[m - 1] + tri[m]) * 5) / 10;
+}
+
+/* Version courte, pour le texte de secours */
+function resumeCourt() {
+  const s = etat.suivi, n = s.temps.length;
+  return `sorties ${s.sorties} (${texteTemps(s.tempsDehorsMs)}) · copies ${s.copies} · ` +
+         `médiane ${String(mediane(s.temps)).replace(".", ",")} s/question · ` +
+         `<3 s : ${s.rapides}/${n} · après sortie : ${s.apresSortie}/${n}`;
+}
+
+function resumeSuivi() {
+  const s = etat.suivi, n = s.temps.length;
+  return `sorties de page : ${s.sorties} (${texteTemps(s.tempsDehorsMs)} hors de la page) · copies : ${s.copies} · ` +
+         `temps médian par question : ${String(mediane(s.temps)).replace(".", ",")} s · ` +
+         `réponses en moins de 3 s : ${s.rapides}/${n} · réponses données après une sortie : ${s.apresSortie}/${n}`;
+}
+
+function compterAide(n) { etat.parties[n - 1].aides++; sauvegarder(); }
+
+function terminerTentative(n) {
+  const serie = enCours[n], stats = etat.parties[n - 1];
+  const score = serie.reponses.filter(Boolean).length, totalQ = serie.questions.length;
+  stats.tentatives++;
+  if (stats.tentatives === 1) stats.premierScore = score;
+  stats.meilleur = Math.max(stats.meilleur, score);
+  const reussi = score >= seuil(n);
+  const zone = $("#quiz-p" + n + " .resultat");
+  zone.hidden = false;
+
+  if (reussi) {
+    stats.reussie = true;
+    zone.className = "resultat reussi";
+    if (n === NB_PARTIES) {             // jeu terminé : on va directement au bilan
+      sauvegarder(); majInterface();
+      ouvrir("bilan");
+      return;
+    }
+    zone.innerHTML = `<p><b>Partie réussie : ${score}/${totalQ}.</b> La partie ${n + 1} est débloquée.</p>
+         <button class="btn" type="button" id="suite-${n}">Passer à la partie ${n + 1}</button>`;
+    $("#suite-" + n).addEventListener("click", () => ouvrir("p" + (n + 1)));
+  } else {
+    zone.className = "resultat rate";
+    zone.innerHTML = `<p><b>Score : ${score}/${totalQ}.</b> Il faut au moins ${seuil(n)} bonnes réponses. Relis « L’essentiel » et les explications ci-dessus, puis recommence : les questions seront différentes.</p>
+      <button class="btn" type="button" id="encore-${n}">Recommencer avec de nouvelles questions</button>`;
+    $("#encore-" + n).addEventListener("click", () => { nouvelleTentative(n); $("#quiz-p" + n).scrollIntoView(); });
+  }
+  sauvegarder();
+  majInterface();
+  zone.scrollIntoView({ block: "nearest" });
+}
+
+
+/* =====================================================================
+   11. NAVIGATION, PROGRESSION, BILAN
+   ===================================================================== */
+function estAccessible(cible) {
+  if (cible === "accueil") return true;
+  if (modeProf()) return true;
+  if (!etat.identite) return false;
+  if (cible === "p1" || cible === "bilan") return true;
+  if (cible === "p2") return etat.parties[0].reussie;
+  return false;
+}
+
+function ouvrir(cible) {
+  if (!estAccessible(cible)) return;
+  arreterAnimation();
+  $$(".partie").forEach(s => (s.hidden = s.id !== cible));
+  $$(".onglet").forEach(o => o.setAttribute("aria-selected", String(o.dataset.cible === cible)));
+  const n = { p1: 1, p2: 2 }[cible];
+  if (n && !enCours[n]) nouvelleTentative(n);
+  if (cible === "bilan") afficherBilan();
+  window.scrollTo(0, 0);
+}
+
+function majInterface() {
+  $$(".onglet").forEach(o => {
+    const libre = estAccessible(o.dataset.cible);
+    o.disabled = !libre;
+    o.title = libre ? "" : "Partie verrouillée";
+  });
+  etat.parties.forEach((p, i) => {
+    const pastille = $("#pastille-" + (i + 1));
+    pastille.textContent = `Partie ${i + 1} : ` + (p.reussie ? "réussie ✓" : (p.tentatives ? "en cours" : "à faire"));
+    pastille.classList.toggle("faite", p.reussie);
+  });
+  $("#chrono").hidden = etat.reglages.chrono === "masque";
+}
+
+function afficherBilan() {
+  const id = etat.identite;
+  $("#bilan-intro").innerHTML = id
+    ? (termine() ? "<b>Bravo, tu as terminé les deux parties !</b> Envoie tes résultats à ton professeur, ou recommence pour les améliorer.<br>" : "") +
+      `${id.prenom} ${id.nom.charAt(0).toUpperCase()}. · ${id.classe} · temps passé : ${texteTemps(etat.tempsMs)}`
+    : "Commence par l’accueil.";
+  $("#table-bilan tbody").innerHTML = etat.parties.map((p, i) => `
+    <tr><td>Partie ${i + 1}</td><td>${p.reussie ? "oui" : "non"}</td><td class="num">${p.tentatives}</td>
+        <td class="num">${p.meilleur}/${nbQuestions(i + 1)}</td><td class="num">${p.bonnes}/${p.repondues}</td><td class="num">${p.aides}</td></tr>`).join("");
+  const b = etat.parties.reduce((t, p) => t + p.bonnes, 0), r = etat.parties.reduce((t, p) => t + p.repondues, 0);
+  $("#bilan-suivi").textContent = "Activité enregistrée : " + resumeSuivi() + ".";
+  $("#bilan-total").innerHTML = `<b>Total : ${b} bonnes réponses sur ${r} (${r ? Math.round(100 * b / r) : 0} %).</b>` +
+    (termine() ? "" : " Tu n’as pas encore terminé : tu peux quand même envoyer où tu en es.");
+}
+
+
+/* =====================================================================
+   12. CONFORT DE LECTURE ET LECTURE À VOIX HAUTE
+   ===================================================================== */
+function appliquerReglages() {
+  const r = etat.reglages, racine = document.documentElement;
+  racine.dataset.taille = r.taille;
+  racine.dataset.police = r.police;
+  racine.dataset.contraste = r.contraste;
+  racine.dataset.mouvement = r.mouvement;
+  $$(".choix[data-reglage]").forEach(groupe => {
+    groupe.querySelectorAll("button").forEach(b =>
+      b.setAttribute("aria-pressed", String(r[groupe.dataset.reglage] === b.dataset.valeur)));
+  });
+  majInterface();
+}
+
+/* Prépare le texte pour la synthèse vocale :
+   « 2p⁶ » est lu « 2 p 6 », les flèches « puis » */
+function texteParle(...elements) {
+  return elements.map(el => {
+    const copie = el.cloneNode(true);
+    copie.querySelectorAll("button.lire, label.cache-visuel, .commandes").forEach(b => b.remove());
+    copie.querySelectorAll("select").forEach(m => m.replaceWith(" case à compléter "));
+    copie.querySelectorAll("sup").forEach(s => (s.textContent = " " + s.textContent.trim() + " "));
+    copie.querySelectorAll(".option").forEach(o => (o.textContent = "Réponse : " + o.textContent + ". "));
+    return copie.textContent.replace(/→/g, " puis ").replace(/(\d)([sp])\b/g, "$1 $2").replace(/\s+/g, " ");
+  }).join(" ");
+}
+function lireAVoixHaute(...elements) {
+  if (!("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const phrase = new SpeechSynthesisUtterance(texteParle(...elements));
+  phrase.lang = "fr-FR"; phrase.rate = 0.95;
+  const voix = speechSynthesis.getVoices().find(v => v.lang && v.lang.startsWith("fr"));
+  if (voix) phrase.voice = voix;
+  speechSynthesis.speak(phrase);
+}
+
+
+/* =====================================================================
+   13. MODE PROFESSEUR
+   ---------------------------------------------------------------------
+   Pour l’activer : ajouter #prof à la fin de l’adresse de la page
+   (ex. https://…/hotel_des_electrons.html#prof), ou ?debug.
+   Toutes les parties s’ouvrent, et un panneau permet de valider une
+   partie, de répondre juste automatiquement ou de voir les réponses.
+   ===================================================================== */
+let profUtilise = false;
+function modeProf() { return /(^|[#?&])(prof|debug)\b/.test(location.hash + location.search); }
+
+function majModeProf() {
+  const actif = modeProf();
+  $("#panneau-prof").hidden = !actif;
+  if (actif) profUtilise = true;
+  else document.documentElement.classList.remove("voir-reponses");
+  majInterface();
+}
+
+function partieAffichee() {
+  const visible = $$(".partie").find(p => !p.hidden);
+  return visible ? { p1: 1, p2: 2 }[visible.id] : undefined;
+}
+
+function actionProf(action) {
+  if (action.startsWith("valider-")) {
+    const n = Number(action.slice(-1));
+    etat.parties[n - 1].reussie = true;
+    sauvegarder(); majInterface();
+    ouvrir(n < NB_PARTIES ? "p" + (n + 1) : "bilan");
+  } else if (action === "remplir") {
+    const n = partieAffichee();
+    if (!n || !enCours[n]) return;
+    enCours[n].questions.forEach((q, i) => {
+      if (enCours[n].reponses[i] !== undefined) return;
+      const bloc = $(`#q${n}-${i}`);
+      if (q.type === "trous") {
+        bloc.querySelectorAll("select").forEach(m => (m.value = q.modele[m.dataset.j].bonne));
+        repondreTrous(n, i);
+      } else if (q.type === "hotel") {
+        q.saisie = [...q.attendu]; majSaisieHotel(bloc, q); repondreHotel(n, i);
+      } else if (q.type === "tableau") {
+        q.choix = { ligne: q.ligne, colonne: q.colonne }; repondreTableau(n, i);
+      } else {
+        repondre(n, i, q.options.indexOf(q.bonne));
+      }
+    });
+  } else if (action === "voir") {
+    document.documentElement.classList.toggle("voir-reponses");
+  } else if (action === "envoyer") {
+    ouvrir("bilan"); envoyerResultats();
+  } else if (action === "quitter") {
+    history.replaceState(null, "", location.pathname + location.search.replace(/[?&]debug\b[^&]*/, ""));
+    majModeProf();
+    ouvrir("accueil");
+  }
+}
+
+
+/* =====================================================================
+   14. DÉMARRAGE ET BRANCHEMENT DES BOUTONS
+   ===================================================================== */
+function demarrer() {
+  // Dessins et découvertes
+  dessinerFacade();
+  afficherSimulateur(1);
+  $("#registre-decouverte").innerHTML = registreHTML("decouverte", "d");
+  $("#registre-aide").innerHTML = registreHTML("aide", "a");
+  afficherDetailElement(11);
+  $$("#registre-decouverte .case").forEach(c => c.addEventListener("click", () => afficherDetailElement(Number(c.dataset.z))));
+  $("#z-sim").addEventListener("input", e => { arreterAnimation(); afficherSimulateur(Number(e.target.value)); });
+  $("#z-moins").addEventListener("click", () => { arreterAnimation(); afficherSimulateur(Math.max(1, Number($("#z-sim").value) - 1)); });
+  $("#z-plus").addEventListener("click", () => { arreterAnimation(); afficherSimulateur(Math.min(18, Number($("#z-sim").value) + 1)); });
+  $("#z-animer").addEventListener("click", lancerAnimation);
+
+  // Identité déjà enregistrée ?
+  if (etat.identite) {
+    $("#prenom").value = etat.identite.prenom; $("#nom").value = etat.identite.nom.charAt(0); $("#classe").value = etat.identite.classe;
+    $("#commencer").textContent = "Reprendre le jeu";
+  }
+
+  // Onglets
+  $$(".onglet").forEach(o => o.addEventListener("click", () => ouvrir(o.dataset.cible)));
+
+  // Démarrage
+  $("#commencer").addEventListener("click", () => {
+    const prenom = $("#prenom").value.trim(), nom = $("#nom").value.trim().toUpperCase(), classe = $("#classe").value.trim();
+    const msg = $("#message-identite");
+    if (!prenom || !nom || !classe) {
+      msg.className = "message erreur";
+      msg.textContent = "Complète les trois champs : prénom, première lettre du nom et classe.";
+      (!prenom ? $("#prenom") : !nom ? $("#nom") : $("#classe")).focus();
+      return;
+    }
+    if (!/^[A-ZÀ-ÖØ-Þ]$/.test(nom)) {
+      msg.className = "message erreur";
+      msg.textContent = "Pour le nom, écris seulement la première lettre de ton nom de famille.";
+      $("#nom").focus();
+      return;
+    }
+    msg.textContent = "";
+    etat.identite = { prenom, nom, classe };
+    sauvegarder(); majInterface();
+    ouvrir(!etat.parties[0].reussie ? "p1" : !etat.parties[1].reussie ? "p2" : "bilan");
+  });
+
+  // Confort de lecture
+  $("#bouton-confort").addEventListener("click", e => {
+    const panneau = $("#confort"); panneau.hidden = !panneau.hidden;
+    e.currentTarget.setAttribute("aria-expanded", String(!panneau.hidden));
+  });
+  $$(".choix[data-reglage] button").forEach(b => b.addEventListener("click", () => {
+    etat.reglages[b.parentElement.dataset.reglage] = b.dataset.valeur;
+    sauvegarder(); appliquerReglages();
+  }));
+  $("#stop-voix").addEventListener("click", () => "speechSynthesis" in window && speechSynthesis.cancel());
+  $$("[data-lire]").forEach(b => b.addEventListener("click", () => lireAVoixHaute($("#" + b.dataset.lire))));
+  if (!("speechSynthesis" in window)) $$(".lire, [data-aide='ecouter']").forEach(b => (b.hidden = true));
+
+  // Aide-mémoire
+  $("#bouton-aide").addEventListener("click", () => $("#aide-memoire").showModal());
+  $("#fermer-aide").addEventListener("click", () => $("#aide-memoire").close());
+
+  // Bilan
+  $("#envoyer").addEventListener("click", envoyerResultats);
+  $("#copier").addEventListener("click", async () => {
+    const zone = $("#texte-secours");
+    try { await navigator.clipboard.writeText(zone.value); $("#copier").textContent = "Texte copié"; }
+    catch (e) { zone.select(); }
+  });
+  // Recommencer : on garde l’identité, on remet les parties et le chrono à zéro
+  let confirmationRecommencer = false;
+  $("#recommencer").addEventListener("click", () => {
+    const msg = $("#message-recommencer");
+    if (!confirmationRecommencer) {
+      confirmationRecommencer = true;
+      msg.textContent = "Tes résultats actuels seront remplacés par ceux de ta nouvelle tentative. Clique une seconde fois pour confirmer.";
+      return;
+    }
+    confirmationRecommencer = false; msg.textContent = "";
+    const neuf = etatVide();
+    etat.parties = neuf.parties; etat.tempsMs = 0; etat.envoye = false; etat.suivi = neuf.suivi;
+    enCours[1] = enCours[2] = null;
+    $("#secours").hidden = true; $("#message-envoi").textContent = "";
+    sauvegarder(); majInterface();
+    ouvrir("p1");
+  });
+
+  let confirmation = false;
+  $("#reinitialiser").addEventListener("click", () => {
+    const msg = $("#message-reinit");
+    if (!confirmation) {
+      confirmation = true;
+      msg.textContent = "Clique une seconde fois sur « Tout effacer » pour confirmer.";
+      return;
+    }
+    const reglages = etat.reglages;
+    etat = etatVide(); etat.reglages = reglages;
+    enCours[1] = enCours[2] = null;
+    sauvegarder();
+    ["#prenom", "#nom", "#classe"].forEach(s => ($(s).value = ""));
+    $("#commencer").textContent = "Entrer dans l’hôtel";
+    confirmation = false; msg.textContent = "Progression effacée.";
+    majInterface(); ouvrir("accueil");
+  });
+
+  // Mode professeur
+  $$("[data-prof]").forEach(b => b.addEventListener("click", () => actionProf(b.dataset.prof)));
+  window.addEventListener("hashchange", majModeProf);
+
+  appliquerReglages();
+  majModeProf();
+  ouvrir("accueil");
+}
+
+demarrer();
+</script>
+</body>
+</html>
